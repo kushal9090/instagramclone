@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "130659363391",
+    "firebase_url": "https://art90-c4c2e.firebaseio.com",
+    "project_id": "art90-c4c2e",
+    "storage_bucket": "art90-c4c2e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130659363391:android:be65de85fcc17ee9",
+        "android_client_info": {
+          "package_name": "com.kushal.instagram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130659363391-1rh9n24oi9okeg1fo7j53v4iilericf5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kushal.instagram",
+            "certificate_hash": "c8f6fd3f069f39ec8eea309d8e412634ccfdf0f0"
+          }
+        },
+        {
+          "client_id": "130659363391-pkf1igrujcn8qdn10sil0p3lt8kf4q0o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD4wOkLs7nMz7Oj2kn_3MAAJSD8MokeN0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130659363391-pkf1igrujcn8qdn10sil0p3lt8kf4q0o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kushal.instagram.RegiActivity"
+    >
+
+
+    <EditText
+        android:id="@+id/emailtb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="129dp"
+        android:ems="10"
+        android:hint="email..."
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        />
+
+    <EditText
+        android:id="@+id/passtb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/emailtb"
+        android:layout_alignStart="@+id/emailtb"
+        android:layout_below="@+id/emailtb"
+        android:layout_marginTop="48dp"
+        android:ems="10"
+        android:hint="password.."
+        android:inputType="textPassword"
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/signuptbn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/passtb"
+        android:layout_alignStart="@+id/passtb"
+        android:layout_below="@+id/passtb"
+        android:layout_marginTop="30dp"
+        android:background="@android:color/darker_gray"
+        android:textColor="@android:color/white"
+        android:text="signup" />
+
+    <Button
+        android:id="@+id/loginbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/signuptbn"
+        android:layout_marginLeft="60dp"
+        android:layout_marginStart="60dp"
+        android:layout_toEndOf="@+id/signuptbn"
+        android:layout_toRightOf="@+id/signuptbn"
+        android:textColor="@android:color/white"
+        android:background="@android:color/darker_gray"
+        android:text="signin" />
+</RelativeLayout>
