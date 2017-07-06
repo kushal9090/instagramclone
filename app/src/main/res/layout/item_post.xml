@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+ <android.support.v7.widget.CardView
+     android:id="@+id/cardpost"
+     android:layout_width="match_parent"
+     android:layout_height="450dp"
+     android:foregroundGravity="center"
+     android:layout_marginTop="21dp"
+     android:layout_alignParentTop="true"
+     android:layout_centerHorizontal="true">
+     <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+         <de.hdodenhof.circleimageview.CircleImageView
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:id="@+id/profile_image"
+             android:layout_width="50dp"
+             android:layout_height="50dp"
+             android:src="@drawable/instausericon"
+             app:civ_border_width="2dp"
+             app:civ_border_color="#FF000000"/>
+
+
+         <TextView
+             android:id="@+id/nametv"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+
+             android:layout_marginLeft="20dp"
+             android:layout_marginStart="20dp"
+             android:layout_marginTop="19dp"
+             android:text="name"
+             android:layout_toRightOf="@+id/profile_image"
+             android:textSize="20sp"
+             android:textStyle="bold"
+             android:textColor="@android:color/black"/>
+
+         <ImageView
+             android:id="@+id/imagepost"
+             android:layout_width="match_parent"
+             android:layout_height="300dp"
+             android:layout_centerHorizontal="true"
+             android:layout_marginTop="73dp"
+              />
+
+         <TextView
+             android:id="@+id/postTitle"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentLeft="true"
+             android:layout_alignParentBottom="true"
+             android:layout_marginBottom="33dp"
+             android:layout_marginLeft="11dp"
+             android:layout_marginStart="11dp"
+             android:text="PostTitle"
+             android:textColor="@android:color/black"
+             android:textSize="15sp"
+             android:textStyle="bold" />
+     </RelativeLayout>
+
+ </android.support.v7.widget.CardView>
+
+
+</RelativeLayout>
