@@ -3,6 +3,7 @@ package com.kushal.instagram.homescreens;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,7 +57,7 @@ public class MessageFragment extends Fragment {
          userrecycle = (RecyclerView) getView().findViewById(R.id.usersrecycler);
         userrecycle.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
-
+  private  Following fol;
     private FirebaseRecyclerAdapter<User , UserViewholder> adapter;
     private void showUsers() {
 
@@ -68,7 +70,7 @@ public class MessageFragment extends Fragment {
                viewHolder.mFollow.setOnClickListener(new View.OnClickListener() {
 
                    @Override
-                   public void onClick(View view) {
+                   public void onClick(final View view) {
                        FirebaseAuth auth = FirebaseAuth.getInstance();
                        String uid = auth.getCurrentUser().getUid();
                        DatabaseReference friends = FirebaseDatabase.getInstance().getReference().child("follow").child(uid).push();
@@ -76,7 +78,23 @@ public class MessageFragment extends Fragment {
                        friends.child("followingname").setValue(user.getName());
                        friends.child("state").setValue("following");
 
-                       
+                       //.....
+
+                      // viewHolder.mTitle.setText(fol.getState()+"you");
+
+                       friends.addValueEventListener(new ValueEventListener() {
+                           @Override
+                           public void onDataChange(DataSnapshot dataSnapshot) {
+                               Following f = dataSnapshot.getValue(Following.class);
+
+                               viewHolder.mFollow.setText(f.getState());
+                           }
+
+                           @Override
+                           public void onCancelled(DatabaseError databaseError) {
+
+                           }
+                       });
 
                    }
                });

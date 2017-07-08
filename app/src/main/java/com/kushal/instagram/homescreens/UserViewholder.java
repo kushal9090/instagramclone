@@ -39,8 +39,5 @@ public class UserViewholder extends RecyclerView.ViewHolder {
         mEmail.setText(user.getName());
 
     }
-    public  void bindbtn(Following f , View.OnClickListener s){
 
-        mFollow.setText(f.getState());
-    }
 }
