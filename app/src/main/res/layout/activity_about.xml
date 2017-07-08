@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kushal.instagram.about.AboutActivity">
+
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/instausericon"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="18dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/followtv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/profile_image"
+        android:layout_marginEnd="51dp"
+        android:layout_marginRight="51dp"
+        android:layout_marginTop="23dp"
+        android:text="following" />
+
+    <TextView
+        android:id="@+id/followerstv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/followtv"
+        android:layout_marginEnd="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_toLeftOf="@+id/followtv"
+        android:layout_toStartOf="@+id/followtv"
+        android:text="followers" />
+
+    <TextView
+        android:id="@+id/posttv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/followerstv"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_toLeftOf="@+id/followerstv"
+        android:layout_toStartOf="@+id/followerstv"
+        android:text="posts" />
+
+    <TextView
+        android:id="@+id/editprofiletv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/profile_image"
+        android:layout_toEndOf="@+id/posttv"
+        android:layout_toRightOf="@+id/posttv"
+        android:text="Edit your profile" />
+
+    <TextView
+        android:id="@+id/nameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="name"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/profile_image"
+        android:layout_alignLeft="@+id/profile_image"
+        android:layout_alignStart="@+id/profile_image" />
+
+</RelativeLayout>

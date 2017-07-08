@@ -10,30 +10,60 @@
         android:id="@+id/postTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="add post title..."
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="93dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="add post title..." />
-
-    <EditText
-        android:id="@+id/postpicuri"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/postTitle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="add pic url.." />
+        android:layout_alignLeft="@+id/postbutton"
+        android:layout_alignStart="@+id/postbutton" />
 
     <Button
         android:id="@+id/postbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/postpicuri"
+        android:text="post"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp"
-        android:text="post" />
+        android:layout_marginBottom="14dp" />
+
+    <Button
+        android:id="@+id/upload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/postTitle"
+        android:layout_marginEnd="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_toLeftOf="@+id/postTitle"
+        android:layout_toStartOf="@+id/postTitle"
+        android:text="select Image" />
+
+    <ImageView
+        android:id="@+id/postpicuri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/upload"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="162dp" />
+
+    <Button
+        android:id="@+id/postbtn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/postbutton"
+        android:layout_alignEnd="@+id/postTitle"
+        android:layout_alignRight="@+id/postTitle"
+        android:text="Post using url" />
+
+    <EditText
+        android:id="@+id/picuri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/upload"
+        android:layout_marginTop="14dp"
+        android:layout_toLeftOf="@+id/postbtn2"
+        android:layout_toStartOf="@+id/postbtn2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="paste url.."/>
 </RelativeLayout>

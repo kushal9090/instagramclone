@@ -36,7 +36,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
 
       if(!TextUtils.isEmpty(post.getPicuri())){
 
-          Picasso.with(imagepost.getContext()).load(post.getPicuri()).into(imagepost);
+          Picasso.with(imagepost.getContext()).load(post.getPicuri()).fit().centerCrop().into(imagepost);
       }
   }
 }

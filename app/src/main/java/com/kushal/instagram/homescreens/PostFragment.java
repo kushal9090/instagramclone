@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.kushal.instagram.MainActivity;
 import com.kushal.instagram.R;
+import com.kushal.instagram.about.AboutActivity;
 import com.kushal.instagram.models.Post;
 import com.kushal.instagram.postadd.PostAddActivity;
 
@@ -42,11 +43,23 @@ public class PostFragment extends Fragment{
         showPost();
     }
     private void initView() {
-
+        initAbout();
         initPostbtn();
         initRecycler();
         initLogout();
     }
+
+    private void initAbout() {
+        ImageButton about = (ImageButton) getView().findViewById(R.id.about);
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent about = new Intent(getActivity() , AboutActivity.class);
+                startActivity(about);
+            }
+        });
+    }
+
     private ImageButton mLogbtn;
     private void initLogout() {
 
@@ -85,7 +98,11 @@ public class PostFragment extends Fragment{
     private RecyclerView mPostRecycler;
     private void initRecycler() {
         mPostRecycler = (RecyclerView) getView().findViewById(R.id.recyclerPost);
-        mPostRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //mPostRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        mPostRecycler.setLayoutManager(linearLayoutManager);
     }
 
     private FirebaseRecyclerAdapter<Post , PostViewHolder> mAdapter;
@@ -102,6 +119,7 @@ public class PostFragment extends Fragment{
                     @Override
                     public void onClick(View view) {
 
+
                     }
                 });
             }
@@ -109,5 +127,6 @@ public class PostFragment extends Fragment{
         mPostRecycler.setAdapter(mAdapter);
 
     }
+
 
 }

@@ -25,7 +25,9 @@
             android:name=".homescreens.HomeScreenActivity"
             android:label="@string/title_activity_home_screen"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".postadd.PostAddActivity"></activity>
+        <activity android:name=".postadd.PostAddActivity" />
+        <activity android:name=".about.AboutActivity" />
+        <activity android:name=".about.FollowingActivity"></activity>
     </application>
 
 </manifest>
