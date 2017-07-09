@@ -1,6 +1,7 @@
 package com.kushal.instagram.homescreens;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,7 @@ import com.google.firebase.database.Query;
 import com.kushal.instagram.MainActivity;
 import com.kushal.instagram.R;
 import com.kushal.instagram.about.AboutActivity;
+import com.kushal.instagram.mesagescreen.MessageActivity;
 import com.kushal.instagram.models.Post;
 import com.kushal.instagram.postadd.PostAddActivity;
 
@@ -36,6 +38,7 @@ public class PostFragment extends Fragment{
     }
     EditText title;
     ImageButton postbtn;
+    ImageButton msgBtn;
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -47,6 +50,18 @@ public class PostFragment extends Fragment{
         initPostbtn();
         initRecycler();
         initLogout();
+        initMessages();
+    }
+
+    private void initMessages() {
+        msgBtn = (ImageButton) getView().findViewById(R.id.imageButtonMsg);
+        msgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent dm = new Intent(getActivity() , MessageActivity.class);
+                startActivity(dm);
+            }
+        });
     }
 
     private void initAbout() {
@@ -63,7 +78,7 @@ public class PostFragment extends Fragment{
     private ImageButton mLogbtn;
     private void initLogout() {
 
-        mLogbtn = (ImageButton) getView().findViewById(R.id.imageButtonlog);
+        mLogbtn = (ImageButton) getView().findViewById(R.id.logout);
         mLogbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

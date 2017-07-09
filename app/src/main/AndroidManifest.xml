@@ -27,7 +27,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".postadd.PostAddActivity" />
         <activity android:name=".about.AboutActivity" />
-        <activity android:name=".about.FollowingActivity"></activity>
+        <activity android:name=".about.FollowingActivity" />
+        <activity android:name=".mesagescreen.MessageActivity" />
+        <activity android:name=".mesagescreen.MessageScreen"></activity>
     </application>
 
 </manifest>

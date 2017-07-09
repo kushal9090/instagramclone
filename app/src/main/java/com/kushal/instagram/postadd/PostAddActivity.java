@@ -106,6 +106,14 @@ public class PostAddActivity extends AppCompatActivity {
 
         mPostTitle.setText("");
 
+        //particular user post..
+        String currentuser_uid = mAuth.getCurrentUser().getUid();
+        DatabaseReference userpost = FirebaseDatabase.getInstance().getReference().child("users_post").child(currentuser_uid).push();
+        userpost.child("email").setValue(current_user);
+        userpost.child("posttitle").setValue(title);
+        userpost.child("picuri").setValue(pic);
+
+
         //mPostPicUri.setText(" ");
         Intent back = new Intent(PostAddActivity.this , HomeScreenActivity.class);
         startActivity(back);
@@ -173,13 +181,19 @@ public class PostAddActivity extends AppCompatActivity {
 
                 mdata.child("email").setValue(current_user);
                 mdata.child("posttitle").setValue(title);
+                mdata.child("picuri").setValue(photo);
                 //  mdata.child("picuri").setValue(picuri);
-
-
-
                 mPostTitle.setText("");
                 //mPostPicUri.setText(" ");
-                mdata.child("picuri").setValue(photo);
+
+
+                //particular user post..
+                String currentuser_uid = mAuth.getCurrentUser().getUid();
+                DatabaseReference userpost = FirebaseDatabase.getInstance().getReference().child("users_post").child(currentuser_uid).push();
+                userpost.child("email").setValue(current_user);
+                userpost.child("posttitle").setValue(title);
+                userpost.child("picuri").setValue(photo);
+
 
 
                 Intent back = new Intent(PostAddActivity.this , HomeScreenActivity.class);

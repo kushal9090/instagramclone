@@ -78,5 +78,19 @@
         android:layout_below="@+id/profile_image"
         android:layout_alignLeft="@+id/profile_image"
         android:layout_alignStart="@+id/profile_image" />
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"
+        android:layout_below="@id/nameTV"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/aboutRecycle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/line"
+        tools:listitem="@layout/item_about"></android.support.v7.widget.RecyclerView>
+
 
 </RelativeLayout>

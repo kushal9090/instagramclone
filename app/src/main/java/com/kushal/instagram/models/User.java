@@ -9,7 +9,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
  * Created by kusha on 7/8/2017.
  */
 @IgnoreExtraProperties
-public class User  {
+public class User implements Parcelable {
     public User(){
 
 
@@ -17,6 +17,24 @@ public class User  {
 
     String uid;
     String name ;
+
+    protected User(Parcel in) {
+        uid = in.readString();
+        name = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
     public String getUid() {
         return uid;
     }
@@ -31,6 +49,17 @@ public class User  {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(uid);
+        parcel.writeString(name);
     }
 
    /* @Override

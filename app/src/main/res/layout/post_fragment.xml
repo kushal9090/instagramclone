@@ -53,7 +53,7 @@
                     android:textStyle="bold"/>
 
                 <ImageButton
-                    android:id="@+id/imageButtonlog"
+                    android:id="@+id/imageButtonMsg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:srcCompat="@android:drawable/ic_menu_send"
@@ -63,6 +63,21 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="18dp"
                     android:layout_marginEnd="18dp" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginStart="22dp"
+                    android:layout_toEndOf="@+id/textView"
+                    android:layout_toRightOf="@+id/textView"
+                    android:background="@color/colorPrimary"
+                    android:clickable="true"
+                    app:backgroundTint="@color/cardview_dark_background"
+                    app:fabSize="mini"
+                    app:srcCompat="@android:drawable/ic_lock_power_off" />
             </RelativeLayout>
 
         </android.support.v7.widget.Toolbar>
