@@ -25,6 +25,7 @@ import com.kushal.instagram.about.AboutActivity;
 import com.kushal.instagram.mesagescreen.MessageActivity;
 import com.kushal.instagram.models.Post;
 import com.kushal.instagram.postadd.PostAddActivity;
+import com.kushal.instagram.search.SearchActivity;
 
 /**
  * Created by kusha on 7/6/2017.
@@ -51,6 +52,20 @@ public class PostFragment extends Fragment{
         initRecycler();
         initLogout();
         initMessages();
+        initSearch();
+    }
+
+    private void initSearch() {
+
+       ImageButton search = (ImageButton) getView().findViewById(R.id.searchIVbtn);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity() , SearchActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     private void initMessages() {
