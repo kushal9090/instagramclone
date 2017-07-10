@@ -17,6 +17,34 @@ public class User implements Parcelable {
 
     String uid;
     String name ;
+    String profilePic;
+    String displayName;
+
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    String bio ;
 
     protected User(Parcel in) {
         uid = in.readString();
@@ -62,30 +90,5 @@ public class User implements Parcelable {
         parcel.writeString(name);
     }
 
-   /* @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.name);
-        dest.writeString(this.uid);
-    }
-
-    protected User(Parcel in) {
-        this.name = in.readString();
-        this.uid= in.readString();
-    }
-    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel source) {
-            return new User(source);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };*/
 }

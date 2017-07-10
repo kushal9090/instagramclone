@@ -25,6 +25,8 @@ import com.kushal.instagram.models.Following;
 import com.kushal.instagram.models.Post;
 import com.kushal.instagram.models.User;
 
+import static android.view.View.GONE;
+
 /**
  * Created by kusha on 7/6/2017.
  */
@@ -46,6 +48,19 @@ public class MessageFragment extends Fragment {
         showUsers();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Following following = new Following();
+        UserViewholder uv = new UserViewholder(getView());
+
+        if(following.getState() != null){
+            uv.mFollow.setVisibility(GONE);
+        }else{
+
+        }
+
+    }
 
     private void initView() {
 
@@ -79,15 +94,14 @@ public class MessageFragment extends Fragment {
                        friends.child("state").setValue("following");
 
                        //.....
-
                       // viewHolder.mTitle.setText(fol.getState()+"you");
-
                        friends.addValueEventListener(new ValueEventListener() {
                            @Override
                            public void onDataChange(DataSnapshot dataSnapshot) {
-                               Following f = dataSnapshot.getValue(Following.class);
-
-                               viewHolder.mFollow.setText(f.getState());
+                               Following following = dataSnapshot.getValue(Following.class);
+                               if (following.getState() != null) {
+                                   viewHolder.mFollow.setVisibility(view.GONE);
+                               }
                            }
 
                            @Override
@@ -98,6 +112,8 @@ public class MessageFragment extends Fragment {
 
                    }
                });
+
+
                 viewHolder.bind(user, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -110,6 +126,5 @@ public class MessageFragment extends Fragment {
 
         userrecycle.setAdapter(adapter);
     }
-
 
 }

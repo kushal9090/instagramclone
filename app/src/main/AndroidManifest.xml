@@ -26,16 +26,16 @@
             android:label="@string/title_activity_home_screen"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".postadd.PostAddActivity" />
+        <activity android:name=".about.AboutActivity" />
         <activity
-            android:name=".about.AboutActivity"
-           />
-        <activity android:name=".about.FollowingActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:name=".about.FollowingActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".mesagescreen.MessageActivity" />
         <activity
             android:name=".search.SearchActivity"
-           android:theme="@style/AppTheme.NoActionBar" />
-
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".InfoActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -11,6 +11,9 @@ public class Following  implements Parcelable{
     public Following(){
 
     }
+
+
+
     String followingname;
 
     public String getFollowing() {

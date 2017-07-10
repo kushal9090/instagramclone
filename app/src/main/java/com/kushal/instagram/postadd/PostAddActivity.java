@@ -10,6 +10,7 @@ import android.provider.SyncStateContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -35,6 +36,7 @@ import com.kushal.instagram.R;
 import com.kushal.instagram.homescreens.HomeScreenActivity;
 import com.kushal.instagram.homescreens.PostFragment;
 import com.kushal.instagram.models.Post;
+import com.kushal.instagram.models.User;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -154,7 +156,7 @@ public class PostAddActivity extends AppCompatActivity {
     }
 
 
-
+   private User user;
     private void post() {
 
 
@@ -174,9 +176,30 @@ public class PostAddActivity extends AppCompatActivity {
                 mProgress.dismiss();
                  String photo = taskSnapshot.getDownloadUrl().toString();
                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+
+                //profile pic
+                String uid =  mAuth.getCurrentUser().getUid();
+                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User name = dataSnapshot.getValue(User.class);
+                        mdata.child("profilePic").setValue(name.getProfilePic());
+                        mdata.child("displayName").setValue(name.getDisplayName());
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                 //............
+
+
+
                 String current_user = mAuth.getCurrentUser().getEmail();
                 String title = mPostTitle.getText().toString();
-
 
 
                 mdata.child("email").setValue(current_user);

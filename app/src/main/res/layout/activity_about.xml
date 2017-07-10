@@ -78,12 +78,23 @@
         android:layout_below="@+id/profile_image"
         android:layout_alignLeft="@+id/profile_image"
         android:layout_alignStart="@+id/profile_image" />
+    <TextView
+        android:id="@+id/bio"
+        android:layout_below="@+id/nameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        />
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@android:color/black"
-        android:layout_below="@id/nameTV"/>
+        android:layout_below="@id/bio"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/aboutRecycle"
@@ -91,6 +102,19 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/line"
         tools:listitem="@layout/item_about"></android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/countFollowing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3"
+        android:textColor="@android:color/black"
+        android:layout_above="@+id/followerstv"
+        android:layout_toRightOf="@+id/editprofiletv"
+        android:layout_toEndOf="@+id/editprofiletv"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:textSize="18sp"/>
 
 
 </RelativeLayout>

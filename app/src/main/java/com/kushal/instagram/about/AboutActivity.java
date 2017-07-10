@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,13 +18,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.kushal.instagram.R;
+import com.kushal.instagram.models.Following;
 import com.kushal.instagram.models.SingleUserpost;
 import com.kushal.instagram.models.User;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AboutActivity extends AppCompatActivity {
 
-
-    private TextView followingtv , nameTv ;
+    private CircleImageView profileimg;
+    private TextView followingtv , nameTv , countFollowing , bio;
     private RecyclerView aboutRecycle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +38,10 @@ public class AboutActivity extends AppCompatActivity {
         
         initRecycler();
         showUserPics();
-        
+        bio = (TextView) findViewById(R.id.bio);
+        profileimg = (CircleImageView) findViewById(R.id.profile_image);
         followingtv = (TextView) findViewById(R.id.followtv);
+        countFollowing = (TextView) findViewById(R.id.countFollowing);
         nameTv = (TextView) findViewById(R.id.nameTV);
         FirebaseAuth auth =  FirebaseAuth.getInstance();
         String uid = auth.getCurrentUser().getUid();
@@ -43,8 +50,11 @@ public class AboutActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User name = dataSnapshot.getValue(User.class);
-
-                nameTv.setText(name.getName());
+                bio.setText(name.getBio());
+                nameTv.setText(name.getDisplayName());
+               if (!TextUtils.isEmpty(name.getProfilePic())){
+                   Picasso.with(profileimg.getContext()).load(name.getProfilePic()).into(profileimg);
+               }
             }
 
             @Override
@@ -57,10 +67,12 @@ public class AboutActivity extends AppCompatActivity {
           public void onClick(View view) {
               Intent f = new Intent(AboutActivity.this , FollowingActivity.class);
               startActivity(f);
+
           }
       });
-    }
 
+
+    }
 
 
     private void initRecycler() {

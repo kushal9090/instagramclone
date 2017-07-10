@@ -47,9 +47,9 @@ public class RegiActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-               signupact();
-              //  Intent intent = new Intent(RegiActivity.this , HomeScreenActivity.class);
-                // startActivity(intent);
+              signupact();
+                //Intent intent = new Intent(RegiActivity.this , InfoActivity.class);
+                //startActivity(intent);
 
             }
         });
@@ -84,7 +84,7 @@ public class RegiActivity extends AppCompatActivity {
                     mDatabase.child("name").setValue(emailad);
                     mDatabase.child("uid").setValue(uid);
                   // mDatabase.child("posts").push().setValue(post.getPicuri());
-                    Intent intent = new Intent(RegiActivity.this , HomeScreenActivity.class);
+                    Intent intent = new Intent(RegiActivity.this , InfoActivity.class);
                     startActivity(intent);
 
 

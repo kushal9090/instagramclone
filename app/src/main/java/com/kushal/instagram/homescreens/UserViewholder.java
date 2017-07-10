@@ -7,8 +7,12 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FacebookAuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.kushal.instagram.R;
 import com.kushal.instagram.models.Following;
 import com.kushal.instagram.models.Post;
@@ -24,7 +28,7 @@ public class UserViewholder extends RecyclerView.ViewHolder {
     TextView mTitle;
     Button mFollow;
     User mUser;
-    Following f = new Following();
+  private  Following following;
     public UserViewholder(View itemView) {
         super(itemView);
 
@@ -39,5 +43,6 @@ public class UserViewholder extends RecyclerView.ViewHolder {
         mEmail.setText(user.getName());
 
     }
+
 
 }
