@@ -175,11 +175,17 @@ public class PostAddActivity extends AppCompatActivity {
 
                 mProgress.dismiss();
                  String photo = taskSnapshot.getDownloadUrl().toString();
-                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+                String uid =  mAuth.getCurrentUser().getUid();
+
+                //key
+
+
 
 
                 //profile pic
-                String uid =  mAuth.getCurrentUser().getUid();
+
                 final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -197,6 +203,7 @@ public class PostAddActivity extends AppCompatActivity {
                  //............
 
 
+                //.............
 
                 String current_user = mAuth.getCurrentUser().getEmail();
                 String title = mPostTitle.getText().toString();

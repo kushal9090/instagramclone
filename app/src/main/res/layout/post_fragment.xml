@@ -101,18 +101,32 @@
 
     <RelativeLayout
         android:id="@+id/buttons"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorPrimary">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="4dp"
+        android:background="@color/common_google_signin_btn_text_dark_default"
+        >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_above="@+id/postbtn"
+            android:background="@android:color/black"
+            android:backgroundTint="@color/common_google_signin_btn_text_dark_focused"
+            android:backgroundTintMode="src_over" />
 
         <ImageButton
             android:id="@+id/postbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            app:srcCompat="@android:drawable/ic_menu_add" />
+            android:layout_marginTop="2dp"
+            android:background="@color/common_google_signin_btn_text_dark_default"
+            app:srcCompat="@drawable/ic_add_box_black_24dp" />
 
         <ImageButton
             android:id="@+id/about"
@@ -123,18 +137,36 @@
             android:layout_alignParentTop="true"
             android:layout_marginEnd="12dp"
             android:layout_marginRight="12dp"
-            app:srcCompat="@android:drawable/ic_menu_myplaces" />
+            android:layout_marginTop="2dp"
+            android:backgroundTint="@color/common_google_signin_btn_text_dark_default"
+            app:srcCompat="@drawable/ic_account_circle_black_48dp" />
 
         <ImageButton
             android:id="@+id/searchIVbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="2dp"
             android:layout_marginEnd="28dp"
             android:layout_marginRight="28dp"
-            app:srcCompat="@android:drawable/ic_search_category_default"
-            android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/postbtn"
-            android:layout_toStartOf="@+id/postbtn" />
+            android:layout_toStartOf="@+id/postbtn"
+            android:backgroundTint="@color/common_google_signin_btn_text_dark_default"
+            app:srcCompat="@drawable/ic_search_black_48dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="23dp"
+            android:layout_marginStart="23dp"
+            android:layout_toEndOf="@+id/postbtn"
+            android:layout_toRightOf="@+id/postbtn"
+            android:background="@color/common_google_signin_btn_text_dark_focused"
+            android:backgroundTint="@color/common_google_signin_btn_text_dark_default"
+            app:srcCompat="@drawable/ic_icon_heart" />
 
     </RelativeLayout>
 
@@ -142,10 +174,11 @@
         android:id="@+id/imageButton3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="?attr/actionModeCopyDrawable"
-        android:layout_below="@+id/frame"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/frame"
+        android:backgroundTint="@color/common_google_signin_btn_text_dark_default"
+        app:srcCompat="@drawable/ic_home_black_48dp" />
 
 
 </RelativeLayout>

@@ -22,6 +22,7 @@ import com.google.firebase.database.Query;
 import com.kushal.instagram.MainActivity;
 import com.kushal.instagram.R;
 import com.kushal.instagram.about.AboutActivity;
+import com.kushal.instagram.commentscreen.CommentScreen;
 import com.kushal.instagram.mesagescreen.MessageActivity;
 import com.kushal.instagram.models.Post;
 import com.kushal.instagram.postadd.PostAddActivity;
@@ -145,9 +146,21 @@ public class PostFragment extends Fragment{
             protected void populateViewHolder(final PostViewHolder viewHolder,final Post post,final int position) {
 
 
+                //comment window..
+                 viewHolder.comment.setOnClickListener(new View.OnClickListener() {
+                     @Override
+                     public void onClick(View view) {
+                         Intent comments = new Intent(getActivity() , CommentScreen.class);
+                         startActivity(comments);
+
+                     }
+                 });
+
+
                 viewHolder.bindToPost(post, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
 
 
                     }

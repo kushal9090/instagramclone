@@ -1,0 +1,185 @@
+package com.kushal.instagram.commentscreen;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.kushal.instagram.R;
+import com.kushal.instagram.models.Comments;
+import com.kushal.instagram.models.Post;
+import com.kushal.instagram.models.User;
+
+public class CommentScreen extends AppCompatActivity {
+
+
+    private RecyclerView commnetRecycler;
+
+    private DatabaseReference mCommentdb;
+    private FirebaseAuth mAuth;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_comment_screen);
+
+
+
+
+
+
+
+        initView();
+        loadComments();
+    }
+    private EditText commentET;
+    private Button commentBtn;
+    private  void initView(){
+
+        commentET = (EditText) findViewById(R.id.commentET);
+        commentBtn = (Button) findViewById(R.id.commentSend);
+
+        commentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                uploadComment();
+            }
+        });
+
+        initRecycler();
+    }
+
+    private void uploadComment() {
+        DatabaseReference post = FirebaseDatabase.getInstance().getReference().child("post");
+        post.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot objSnapshot: dataSnapshot.getChildren()) {
+                    String obj = objSnapshot.getKey();
+
+                    mCommentdb = FirebaseDatabase.getInstance().getReference().child("comments").child(obj).push();
+                    mCommentdb.child("postkey").setValue(obj);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        final String cmntet = commentET.getText().toString();
+        mAuth = FirebaseAuth.getInstance();
+        String user_id = mAuth.getCurrentUser().getUid();
+        final DatabaseReference user = FirebaseDatabase.getInstance().getReference().child("users").child(user_id);
+
+        user.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User users = dataSnapshot.getValue(User.class);
+                //String author , profilePic , commnet ;
+                mCommentdb.child("author").setValue(users.getDisplayName());
+                mCommentdb.child("profilePic").setValue(users.getProfilePic());
+                mCommentdb.child("comment").setValue(cmntet);
+                commentET.setText("");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+    }
+
+    private void initRecycler() {
+
+        commnetRecycler = (RecyclerView) findViewById(R.id.commentRecycler);
+        commnetRecycler.setLayoutManager(new LinearLayoutManager(this));
+    }
+  private Post post ;
+
+
+   private FirebaseRecyclerAdapter<Comments , CommentViewHolder> mAdapter;
+    private void loadComments() {
+
+      Comments cmnt = new Comments();
+
+
+
+        final DatabaseReference commentss= FirebaseDatabase.getInstance().getReference();
+        commentss.child("comments").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                for(DataSnapshot key : dataSnapshot.getChildren() ){
+
+                    String k = key.getKey();
+                    commentss.child(k);
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                Comments newComment = dataSnapshot.getValue(Comments.class);
+                String commentKey = dataSnapshot.getKey();
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+         Query commentQuery = commentss;
+
+
+
+
+        mAdapter = new FirebaseRecyclerAdapter<Comments, CommentViewHolder>(Comments.class , R.layout.item_comment , CommentViewHolder.class , commentQuery) {
+            @Override
+            protected void populateViewHolder(final CommentViewHolder viewHolder,final Comments comments,final int position) {
+
+
+
+
+
+
+                viewHolder.bind(comments, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+
+            }
+        };
+        commnetRecycler.setAdapter(mAdapter);
+    }
+}

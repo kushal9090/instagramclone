@@ -34,8 +34,10 @@
         <activity
             android:name=".search.SearchActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".InfoActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".InfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".commentscreen.CommentScreen"></activity>
     </application>
 
 </manifest>
