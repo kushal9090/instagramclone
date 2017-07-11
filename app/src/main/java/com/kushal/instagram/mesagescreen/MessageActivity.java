@@ -63,9 +63,9 @@ public class MessageActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-                     //   Intent intent = new Intent(MessageActivity.this ,  MessageScreen.class);
-                       // intent.putExtra(MessageScreen.EXTRAS_USER , user);
-                        //startActivity(intent);
+                      Intent intent = new Intent(MessageActivity.this ,  MessageScreen.class);
+                        intent.putExtra(MessageScreen.EXTRA_USERS, follow);
+                        startActivity(intent);
                     }
                 });
 

@@ -89,8 +89,9 @@ public class MessageFragment extends Fragment {
                        FirebaseAuth auth = FirebaseAuth.getInstance();
                        String uid = auth.getCurrentUser().getUid();
                        DatabaseReference friends = FirebaseDatabase.getInstance().getReference().child("follow").child(uid).push();
-                       friends.child("following").setValue(user.getUid());
-                       friends.child("followingname").setValue(user.getName());
+                       friends.child("followingid").setValue(user.getUid());
+                       friends.child("followingname").setValue(user.getDisplayName());
+                       friends.child("dp").setValue(user.getProfilePic());
                        friends.child("state").setValue("following");
 
                        //.....

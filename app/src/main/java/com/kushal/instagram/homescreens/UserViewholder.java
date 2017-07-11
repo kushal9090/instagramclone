@@ -40,7 +40,7 @@ public class UserViewholder extends RecyclerView.ViewHolder {
 
     public void bind(User user , View.OnClickListener stat){
 
-        mEmail.setText(user.getName());
+        mEmail.setText(user.getDisplayName());
 
     }
 

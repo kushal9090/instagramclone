@@ -1,12 +1,15 @@
 package com.kushal.instagram.commentscreen;
 
+import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,6 +25,9 @@ import com.kushal.instagram.models.Comments;
 import com.kushal.instagram.models.Post;
 import com.kushal.instagram.models.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CommentScreen extends AppCompatActivity {
 
 
@@ -29,16 +35,12 @@ public class CommentScreen extends AppCompatActivity {
 
     private DatabaseReference mCommentdb;
     private FirebaseAuth mAuth;
+    private TextView ok ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment_screen);
-
-
-
-
-
-
 
         initView();
         loadComments();
@@ -59,9 +61,9 @@ public class CommentScreen extends AppCompatActivity {
 
         initRecycler();
     }
-
+private Post mPost;
     private void uploadComment() {
-        DatabaseReference post = FirebaseDatabase.getInstance().getReference().child("post");
+        final DatabaseReference post = FirebaseDatabase.getInstance().getReference().child("post");
         post.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -69,7 +71,7 @@ public class CommentScreen extends AppCompatActivity {
                     String obj = objSnapshot.getKey();
 
                     mCommentdb = FirebaseDatabase.getInstance().getReference().child("comments").child(obj).push();
-                    mCommentdb.child("postkey").setValue(obj);
+                   // mCommentdb.child("postkey").setValue(obj);
 
                 }
             }
@@ -111,65 +113,19 @@ public class CommentScreen extends AppCompatActivity {
         commnetRecycler = (RecyclerView) findViewById(R.id.commentRecycler);
         commnetRecycler.setLayoutManager(new LinearLayoutManager(this));
     }
-  private Post post ;
+
 
 
    private FirebaseRecyclerAdapter<Comments , CommentViewHolder> mAdapter;
     private void loadComments() {
 
-      Comments cmnt = new Comments();
-
-
 
         final DatabaseReference commentss= FirebaseDatabase.getInstance().getReference();
-        commentss.child("comments").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-                for(DataSnapshot key : dataSnapshot.getChildren() ){
-
-                    String k = key.getKey();
-                    commentss.child(k);
-                }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Comments newComment = dataSnapshot.getValue(Comments.class);
-                String commentKey = dataSnapshot.getKey();
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-         Query commentQuery = commentss;
-
-
-
+        final Query commentQuery = commentss.child("comments");
 
         mAdapter = new FirebaseRecyclerAdapter<Comments, CommentViewHolder>(Comments.class , R.layout.item_comment , CommentViewHolder.class , commentQuery) {
             @Override
             protected void populateViewHolder(final CommentViewHolder viewHolder,final Comments comments,final int position) {
-
-
-
-
-
 
                 viewHolder.bind(comments, new View.OnClickListener() {
                     @Override

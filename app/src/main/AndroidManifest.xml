@@ -30,14 +30,18 @@
         <activity
             android:name=".about.FollowingActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".mesagescreen.MessageActivity" />
+        <activity android:name=".mesagescreen.MessageActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity
             android:name=".search.SearchActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".InfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".commentscreen.CommentScreen"></activity>
+        <activity android:name=".commentscreen.CommentScreen" />
+        <activity android:name=".mesagescreen.MessageScreen"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

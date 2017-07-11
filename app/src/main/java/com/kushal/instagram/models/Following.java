@@ -11,24 +11,22 @@ public class Following  implements Parcelable{
     public Following(){
 
     }
+String followingid;
 
-
-
-    String followingname;
-
-    public String getFollowing() {
-        return following;
+    public String getDp() {
+        return dp;
     }
 
-    public void setFollowing(String following) {
-        this.following = following;
+    public void setDp(String dp) {
+        this.dp = dp;
     }
 
-    String following;
-
+    String dp;
     protected Following(Parcel in) {
+        followingid = in.readString();
         followingname = in.readString();
         state = in.readString();
+        dp = in.readString();
     }
 
     public static final Creator<Following> CREATOR = new Creator<Following>() {
@@ -42,6 +40,14 @@ public class Following  implements Parcelable{
             return new Following[size];
         }
     };
+
+    public String getFollowingid() {
+        return followingid;
+    }
+
+    public void setFollowingid(String followingid) {
+        this.followingid = followingid;
+    }
 
     public String getFollowingname() {
         return followingname;
@@ -59,7 +65,9 @@ public class Following  implements Parcelable{
         this.state = state;
     }
 
+    String followingname;
     String state;
+
 
     @Override
     public int describeContents() {
@@ -68,7 +76,9 @@ public class Following  implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(followingid);
         parcel.writeString(followingname);
         parcel.writeString(state);
+        parcel.writeString(dp);
     }
 }

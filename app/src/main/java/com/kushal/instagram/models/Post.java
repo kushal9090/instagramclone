@@ -13,6 +13,16 @@ public class Post {
     String posttitle;
     String displayName;
 
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    String  key;
+
     public String getDisplayName() {
         return displayName;
     }
