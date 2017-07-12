@@ -9,6 +9,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/commentRecycler"
         android:layout_width="match_parent"
+        android:layout_below="@+id/toolbar6"
         android:layout_height="match_parent"
         android:layout_above="@+id/commentET"
         tools:listitem="@layout/item_comment">
@@ -38,4 +39,36 @@
         android:layout_alignTop="@+id/commentET"
         android:background="@color/facebook"
         android:text="send"/>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <TextView
+        android:id="@+id/nameparce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="12dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/keyparce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/toolbar6"
+        android:layout_alignEnd="@+id/nameparce"
+        android:layout_alignRight="@+id/nameparce"
+        android:text="TextView" />
 </RelativeLayout>

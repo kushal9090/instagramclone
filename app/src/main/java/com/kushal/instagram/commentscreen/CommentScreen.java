@@ -36,7 +36,7 @@ public class CommentScreen extends AppCompatActivity {
     private DatabaseReference mCommentdb;
     private FirebaseAuth mAuth;
     private TextView ok ;
-
+    private TextView nameparce , keyparce;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,14 @@ public class CommentScreen extends AppCompatActivity {
         getIntent().setFlags(0);
         initView();
         loadComments();
+
+        nameparce = (TextView) findViewById(R.id.nameparce);
+        nameparce.setText(mPost.getDisplayName());
+
+        keyparce = (TextView) findViewById(R.id.keyparce);
+        keyparce.setText(mPost.getKey());
+
+
     }
     private EditText commentET;
     private Button commentBtn;
@@ -70,24 +78,7 @@ public class CommentScreen extends AppCompatActivity {
     }
 
     private void uploadComment() {
-        final DatabaseReference post = FirebaseDatabase.getInstance().getReference().child("post");
-        post.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot objSnapshot: dataSnapshot.getChildren()) {
-                    String obj = objSnapshot.getKey();
-
-                    mCommentdb = FirebaseDatabase.getInstance().getReference().child("comments").child(obj).push();
-                   // mCommentdb.child("postkey").setValue(obj);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        mCommentdb = FirebaseDatabase.getInstance().getReference().child("comments").child(mPost.getKey()).push();
 
         final String cmntet = commentET.getText().toString();
         mAuth = FirebaseAuth.getInstance();
@@ -125,11 +116,12 @@ public class CommentScreen extends AppCompatActivity {
  private Post com;
    private FirebaseRecyclerAdapter<Comments , CommentViewHolder> mAdapter;
     private void loadComments() {
-
+          String key = mPost.getKey();
 
         final DatabaseReference commentss= FirebaseDatabase.getInstance().getReference();
-        final Query commentQuery = commentss.child("comments").child(mPost.getKey()
-        );
+        final Query commentQuery = commentss.child("comments").child(key);
+
+
 
         mAdapter = new FirebaseRecyclerAdapter<Comments, CommentViewHolder>(Comments.class , R.layout.item_comment , CommentViewHolder.class , commentQuery) {
             @Override
