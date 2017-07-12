@@ -52,8 +52,8 @@ public class MessageScreen extends AppCompatActivity {
         name.setText(following.getFollowingname());
 
         mRecycler = (RecyclerView) findViewById(R.id.msgRecycler);
-        mRecycler.setLayoutManager(new LinearLayoutManager(this));
-
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mRecycler.setLayoutManager(mLayoutManager);
         messageEt = (EditText) findViewById(R.id.messageET);
         fab = (FloatingActionButton) findViewById(R.id.fab);
 

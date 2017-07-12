@@ -6,64 +6,95 @@
     android:layout_height="match_parent"
     tools:context="com.kushal.instagram.postadd.PostAddActivity">
 
-    <EditText
-        android:id="@+id/postTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="add post title..."
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/postbutton"
-        android:layout_alignStart="@+id/postbutton" />
-
     <Button
         android:id="@+id/postbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="post"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="14dp" />
+        android:layout_alignBottom="@+id/toolbar5"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:backgroundTint="@color/common_google_signin_btn_text_dark_default"
+        android:text="Share"
+        android:textColor="@color/facebook"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/postTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/upload"
+        android:layout_alignStart="@+id/upload"
+        android:layout_below="@+id/postbutton"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/edittext_style"
+        android:ems="10"
+        android:hint="Write a caption.."
+        android:inputType="textPersonName"
+        android:padding="20dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/postpicuri"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray"
+        android:id="@+id/view2" />
 
     <Button
         android:id="@+id/upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/postTitle"
-        android:layout_marginEnd="18dp"
-        android:layout_marginRight="18dp"
-        android:layout_toLeftOf="@+id/postTitle"
-        android:layout_toStartOf="@+id/postTitle"
-        android:text="select Image" />
+        android:text="select Image"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:layout_marginBottom="47dp"
+        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:id="@+id/postpicuri"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/upload"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="162dp" />
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/profile"
+        android:layout_below="@+id/postbutton"
+        android:layout_toLeftOf="@+id/postTitle"
+        android:layout_toStartOf="@+id/postTitle"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp" />
 
     <Button
         android:id="@+id/postbtn2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/postbutton"
-        android:layout_alignEnd="@+id/postTitle"
-        android:layout_alignRight="@+id/postTitle"
-        android:text="Post using url" />
+        android:text="Post using url"
+        android:backgroundTint="@android:color/white"
+        android:textColor="@color/facebook"
+        android:textStyle="bold"
+        android:layout_alignTop="@+id/picuri"
+        android:layout_alignRight="@+id/postpicuri"
+        android:layout_alignEnd="@+id/postpicuri" />
 
     <EditText
         android:id="@+id/picuri"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/upload"
-        android:layout_marginTop="14dp"
-        android:layout_toLeftOf="@+id/postbtn2"
-        android:layout_toStartOf="@+id/postbtn2"
+        android:layout_marginTop="17dp"
         android:ems="10"
+        android:padding="20dp"
         android:inputType="textPersonName"
-        android:hint="paste url.."/>
+        android:hint="paste url.."
+        android:layout_below="@+id/view2"
+        android:layout_alignLeft="@+id/postTitle"
+        android:layout_alignStart="@+id/postTitle" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

@@ -3,6 +3,7 @@ package com.kushal.instagram.homescreens;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -44,6 +45,9 @@ public class PostFragment extends Fragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        DatabaseReference postkey = FirebaseDatabase.getInstance().getReference().child("post");
+        String key = postkey.getKey();
+
         initView();
         showPost();
     }
@@ -151,6 +155,7 @@ public class PostFragment extends Fragment{
                      @Override
                      public void onClick(View view) {
                          Intent comments = new Intent(getActivity() , CommentScreen.class);
+
                          startActivity(comments);
 
                      }

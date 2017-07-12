@@ -68,6 +68,8 @@ public class PostAddActivity extends AppCompatActivity {
 
         mdata = FirebaseDatabase.getInstance().getReference().child("post").push();
 
+
+
         storageReference = FirebaseStorage.getInstance().getReference();
         mPostTitle = (EditText) findViewById(R.id.postTitle);
      mPicuri = (EditText) findViewById(R.id.picuri);
@@ -101,7 +103,7 @@ public class PostAddActivity extends AppCompatActivity {
         String title = mPostTitle.getText().toString();
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
        String current_user = mAuth.getCurrentUser().getEmail();
-       DatabaseReference data2 = FirebaseDatabase.getInstance().getReference().child("post").push();
+       DatabaseReference data2 = FirebaseDatabase.getInstance().getReference();
         data2.child("email").setValue(current_user);
         data2.child("posttitle").setValue(title);
         data2.child("picuri").setValue(pic);
@@ -144,6 +146,12 @@ public class PostAddActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             filePath = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                mPostPicUri.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
 
         }
@@ -182,8 +190,6 @@ public class PostAddActivity extends AppCompatActivity {
                 //key
 
 
-
-
                 //profile pic
 
                 final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
@@ -191,6 +197,7 @@ public class PostAddActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User name = dataSnapshot.getValue(User.class);
+
                         mdata.child("profilePic").setValue(name.getProfilePic());
                         mdata.child("displayName").setValue(name.getDisplayName());
                     }

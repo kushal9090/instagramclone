@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommentScreen extends AppCompatActivity {
-
+   public static  String EXTRA_DATA = "key";
 
     private RecyclerView commnetRecycler;
 
@@ -115,7 +115,7 @@ private Post mPost;
     }
 
 
-
+ private Post com;
    private FirebaseRecyclerAdapter<Comments , CommentViewHolder> mAdapter;
     private void loadComments() {
 

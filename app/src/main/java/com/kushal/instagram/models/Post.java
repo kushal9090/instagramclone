@@ -1,10 +1,13 @@
 package com.kushal.instagram.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by kusha on 7/6/2017.
  */
 
-public class Post {
+public class Post implements Parcelable{
 
     public Post(){
 
@@ -12,6 +15,27 @@ public class Post {
     }
     String posttitle;
     String displayName;
+
+    protected Post(Parcel in) {
+        posttitle = in.readString();
+        displayName = in.readString();
+        key = in.readString();
+        profilePic = in.readString();
+        email = in.readString();
+        picuri = in.readString();
+    }
+
+    public static final Creator<Post> CREATOR = new Creator<Post>() {
+        @Override
+        public Post createFromParcel(Parcel in) {
+            return new Post(in);
+        }
+
+        @Override
+        public Post[] newArray(int size) {
+            return new Post[size];
+        }
+    };
 
     public String getKey() {
         return key;
@@ -68,4 +92,18 @@ public class Post {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(posttitle);
+        parcel.writeString(displayName);
+        parcel.writeString(key);
+        parcel.writeString(profilePic);
+        parcel.writeString(email);
+        parcel.writeString(picuri);
+    }
 }
