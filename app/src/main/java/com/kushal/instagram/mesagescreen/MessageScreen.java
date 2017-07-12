@@ -24,6 +24,9 @@ import com.kushal.instagram.models.Message;
 import com.kushal.instagram.models.User;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MessageScreen extends AppCompatActivity {
@@ -66,6 +69,10 @@ public class MessageScreen extends AppCompatActivity {
         });
 
         loadChat();
+    }
+    public void getCurrentTime(View view) {
+
+
     }
 
 
@@ -174,12 +181,14 @@ public class MessageScreen extends AppCompatActivity {
             class IncomingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
                 CircleImageView dpin;
-                TextView msgincome;
+                TextView msgincome , time;
+
 
                 public IncomingViewHolder(View v) {
                     super(v);
                     dpin = (CircleImageView) v.findViewById(R.id.dp);
                     msgincome = (TextView) v.findViewById(R.id.msgincoming);
+                    time = (TextView) v.findViewById(R.id.time);
                 }
 
                 @Override
@@ -192,9 +201,14 @@ public class MessageScreen extends AppCompatActivity {
                 public void bindToMessage(Message message, View.OnClickListener starClickListener) {
 
                     if (!TextUtils.isEmpty(message.getDp())) {
-                        Picasso.with(dpin.getContext()).load(message.getDp()).into(dpin);
+                        Picasso.with(dpin.getContext()).load(following.getDp()).into(dpin);
                     }
                     msgincome.setText(message.getData());
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm");
+                    String strDate =   mdformat.format(calendar.getTime());
+                    time.setText(strDate);
+
                 }
 
             }
@@ -202,12 +216,14 @@ public class MessageScreen extends AppCompatActivity {
 
             class OutgoingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-
+                TextView time;
                 TextView msg;
 
                 public OutgoingViewHolder(View v) {
                     super(v);
                     msg = (TextView) v.findViewById(R.id.msg);
+                    time = (TextView) v.findViewById(R.id.time);
+
                 }
 
                 @Override
@@ -220,6 +236,12 @@ public class MessageScreen extends AppCompatActivity {
                 public void bindToMessage(Message message, View.OnClickListener starClickListener) {
 
                     msg.setText(message.getData());
+
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm");
+                    String strDate =   mdformat.format(calendar.getTime());
+                    time.setText(strDate);
+
                 }
 
 

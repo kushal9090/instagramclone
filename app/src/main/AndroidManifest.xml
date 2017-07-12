@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kushal.instagram">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_instalogo"
@@ -25,15 +27,16 @@
             android:name=".homescreens.HomeScreenActivity"
             android:label="@string/title_activity_home_screen"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".postadd.PostAddActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".postadd.PostAddActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".about.AboutActivity" />
         <activity
             android:name=".about.FollowingActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".mesagescreen.MessageActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            />
+        <activity
+            android:name=".mesagescreen.MessageActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".search.SearchActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -41,8 +44,10 @@
             android:name=".InfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".commentscreen.CommentScreen" />
-        <activity android:name=".mesagescreen.MessageScreen"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".mesagescreen.MessageScreen"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".about.EditProfileActivity"></activity>
     </application>
 
 </manifest>

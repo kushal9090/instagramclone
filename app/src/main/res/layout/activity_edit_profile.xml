@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kushal.instagram.about.EditProfileActivity">
+
+    <ImageView
+        android:id="@+id/profilepicchange"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="29dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="46dp"
+        app:srcCompat="@drawable/profile"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:clickable="true"
+        app:backgroundTint="@color/facebook"
+        app:fabSize="mini"
+        app:srcCompat="@android:drawable/ic_menu_upload"
+        android:layout_alignTop="@+id/profilepicchange"
+        android:layout_alignLeft="@+id/fabname"
+        android:layout_alignStart="@+id/fabname" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/profilepicchange"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray"
+        android:id="@+id/view3">
+
+    </View>
+
+    <EditText
+        android:id="@+id/displaynamechanged"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="enter a user name.."
+        android:layout_below="@+id/view3"
+        android:layout_alignLeft="@+id/profilepicchange"
+        android:layout_alignStart="@+id/profilepicchange" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/displaynamechanged"
+        android:layout_marginEnd="53dp"
+        android:layout_marginRight="53dp"
+        android:clickable="true"
+        app:backgroundTint="@color/facebook"
+        app:fabSize="mini"
+        app:srcCompat="@android:drawable/ic_menu_upload" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/displaynamechanged"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray"
+        android:id="@+id/view2">
+
+    </View>
+
+    <EditText
+        android:id="@+id/biochange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/displaynamechanged"
+        android:layout_alignStart="@+id/displaynamechanged"
+        android:layout_below="@+id/view2"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:hint="edit bio"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabbio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/fabname"
+        android:layout_alignRight="@+id/fabname"
+        android:layout_alignTop="@+id/biochange"
+        android:clickable="true"
+        app:backgroundTint="@color/facebook"
+        app:fabSize="mini"
+        app:srcCompat="@android:drawable/ic_menu_upload" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/biochange"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/biochange"
+        android:layout_marginBottom="29dp"
+        android:clickable="true"
+        app:backgroundTint="@color/facebook"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_account_circle_black_48dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/back"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
+        android:layout_toEndOf="@+id/back"
+        android:layout_toRightOf="@+id/back"
+        android:text="Go Back" />
+
+</RelativeLayout>

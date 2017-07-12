@@ -46,7 +46,7 @@ public class PostFragment extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         DatabaseReference postkey = FirebaseDatabase.getInstance().getReference().child("post");
-        String key = postkey.getKey();
+
 
         initView();
         showPost();
@@ -142,21 +142,37 @@ public class PostFragment extends Fragment{
 
     private FirebaseRecyclerAdapter<Post , PostViewHolder> mAdapter;
     private void showPost() {
-        DatabaseReference post = FirebaseDatabase.getInstance().getReference();
-        Query postQuery = post.child("post");
+        final DatabaseReference pOST = FirebaseDatabase.getInstance().getReference();
+        Query postQuery = pOST.child("post");
 
         mAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(Post.class , R.layout.item_post , PostViewHolder.class , postQuery) {
             @Override
             protected void populateViewHolder(final PostViewHolder viewHolder,final Post post,final int position) {
+                final DatabaseReference postRef = getRef(position);
 
+
+                // Set click listener for the whole post view
+                final String postKey = postRef.getKey();
+                DatabaseReference pt = FirebaseDatabase.getInstance().getReference().child("post").child(postKey);
+                pt.child("key").setValue(postKey);
+
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
 
                 //comment window..
                  viewHolder.comment.setOnClickListener(new View.OnClickListener() {
                      @Override
                      public void onClick(View view) {
+
                          Intent comments = new Intent(getActivity() , CommentScreen.class);
 
+                         comments.putExtra(CommentScreen.EXTRA_DATA , post);
                          startActivity(comments);
+
 
                      }
                  });
@@ -165,6 +181,7 @@ public class PostFragment extends Fragment{
                 viewHolder.bindToPost(post, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
 
 
 

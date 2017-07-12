@@ -28,7 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AboutActivity extends AppCompatActivity {
 
     private CircleImageView profileimg;
-    private TextView followingtv , nameTv , countFollowing , bio;
+    private TextView followingtv , nameTv , countFollowing , bio , editprofile;
     private RecyclerView aboutRecycle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class AboutActivity extends AppCompatActivity {
         followingtv = (TextView) findViewById(R.id.followtv);
         countFollowing = (TextView) findViewById(R.id.countFollowing);
         nameTv = (TextView) findViewById(R.id.nameTV);
+        editprofile = (TextView) findViewById(R.id.editprofiletv);
         FirebaseAuth auth =  FirebaseAuth.getInstance();
         String uid = auth.getCurrentUser().getUid();
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
@@ -70,7 +71,14 @@ public class AboutActivity extends AppCompatActivity {
 
           }
       });
+     editprofile.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+             Intent kk = new Intent(AboutActivity.this , EditProfileActivity.class);
+             startActivity(kk);
 
+         }
+     });
 
     }
 

@@ -53,7 +53,7 @@ public class PostAddActivity extends AppCompatActivity {
     private Button mPostbtn2;
     //constant to track image chooser intent
     private static final int PICK_IMAGE_REQUEST = 234;
-
+    private User userget;
     private Uri filePath;
     private StorageReference storageReference;
 
@@ -189,7 +189,6 @@ public class PostAddActivity extends AppCompatActivity {
 
                 //key
 
-
                 //profile pic
 
                 final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
@@ -200,7 +199,7 @@ public class PostAddActivity extends AppCompatActivity {
 
                         mdata.child("profilePic").setValue(name.getProfilePic());
                         mdata.child("displayName").setValue(name.getDisplayName());
-                    }
+                                            }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {

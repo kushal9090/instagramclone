@@ -1,4 +1,4 @@
-package com.kushal.instagram;
+package com.kushal.instagram.about;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -22,17 +22,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.kushal.instagram.homescreens.HomeScreenActivity;
-import com.kushal.instagram.postadd.PostAddActivity;
+import com.kushal.instagram.InfoActivity;
+import com.kushal.instagram.MainActivity;
+import com.kushal.instagram.R;
 
 import java.io.IOException;
 
-public class InfoActivity extends AppCompatActivity {
+public class EditProfileActivity extends AppCompatActivity {
 
     private ImageView userpicadd;
     private EditText displayname ;
     private EditText bio ;
-    private FloatingActionButton nextbtn;
+    private FloatingActionButton fabup , fabname , fabbio , back;
 
     private static final int PICK_IMAGE_REQUEST = 234;
 
@@ -40,38 +41,77 @@ public class InfoActivity extends AppCompatActivity {
     private StorageReference storageReference;
 
     private DatabaseReference mdatabase;
-     private  FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info);
+        setContentView(R.layout.activity_edit_profile);
         mAuth = FirebaseAuth.getInstance();
         String userid = mAuth.getCurrentUser().getUid();
         mdatabase = FirebaseDatabase.getInstance().getReference().child("users").child(userid);
         storageReference = FirebaseStorage.getInstance().getReference();
 
-        userpicadd = (ImageView) findViewById(R.id.userpic);
-        displayname = (EditText) findViewById(R.id.displayName);
-        bio = (EditText) findViewById(R.id.bio);
-        nextbtn =(FloatingActionButton) findViewById(R.id.nextbtn);
+        displayname = (EditText) findViewById(R.id.displaynamechanged);
+        bio = (EditText) findViewById(R.id.biochange);
+        userpicadd = (ImageView) findViewById(R.id.profilepicchange);
         userpicadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showFileChooser();
+                showFileChooser();;
             }
         });
 
-        nextbtn.setOnClickListener(new View.OnClickListener() {
+
+        fabup = (FloatingActionButton) findViewById(R.id.fabup);
+        fabbio = (FloatingActionButton) findViewById(R.id.fabbio);
+        fabname = (FloatingActionButton) findViewById(R.id.fabname);
+        back = (FloatingActionButton) findViewById(R.id.back);
+
+        fabup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addInfo();
+                updateDp();
             }
         });
 
+        fabname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateName();
+            }
+        });
+        fabbio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              updateBio();
+            }
+        });
 
-
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent back = new Intent(EditProfileActivity.this , AboutActivity.class);
+                startActivity(back);
+                finish();
+            }
+        });
     }
+
+    private void updateName() {
+        String name = displayname.getText().toString();
+
+        mdatabase.child("displayName").setValue(name);
+        Toast.makeText(this, "successfully changed", Toast.LENGTH_SHORT).show();
+    }
+    private void updateBio() {
+        String bo = bio.getText().toString();
+
+        mdatabase.child("bio").setValue(bo);
+        Toast.makeText(this, "successfully changed", Toast.LENGTH_SHORT).show();
+    }
+
+
     private void showFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -98,35 +138,19 @@ public class InfoActivity extends AppCompatActivity {
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
-    private void addInfo() {
-       if(TextUtils.isEmpty(displayname.getText())){
-           Toast.makeText(this, "Please Enter a display name....", Toast.LENGTH_SHORT).show();
-           return;
-       }
-        if(TextUtils.isEmpty(bio.getText())){
-            Toast.makeText(this, "Please Enter bio....", Toast.LENGTH_SHORT).show();
-            return;
-        }
+    private void updateDp() {
 
 
         StorageReference sRef = storageReference.child("profilepics/"+ System.currentTimeMillis() + "." + getFileExtension(filePath));
         sRef.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                String display = displayname.getText().toString();
-                String about = bio.getText().toString();
                 String photo = taskSnapshot.getDownloadUrl().toString();
 
-                //String profilePic , displayName , bio ;
                 mdatabase.child("profilePic").setValue(photo);
-                mdatabase.child("displayName").setValue(display);
-                mdatabase.child("bio").setValue(about);
 
-
-                Intent next = new Intent(InfoActivity.this , MainActivity.class);
-                startActivity(next);
-                finish();
+                Toast.makeText(EditProfileActivity.this, "your profile pic has been changed..", Toast.LENGTH_SHORT).show();
+                return;
             }
         });
 

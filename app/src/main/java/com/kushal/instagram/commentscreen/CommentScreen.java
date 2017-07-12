@@ -29,19 +29,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommentScreen extends AppCompatActivity {
-   public static  String EXTRA_DATA = "key";
-
+   public static  String EXTRA_DATA = "post";
+    private Post mPost;
     private RecyclerView commnetRecycler;
-
+    private String mPostKey;
     private DatabaseReference mCommentdb;
     private FirebaseAuth mAuth;
     private TextView ok ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment_screen);
-
+        Bundle bundle = getIntent().getExtras();
+        mPost = bundle.getParcelable(EXTRA_DATA);
+        getIntent().removeExtra(EXTRA_DATA);
+        getIntent().setAction("");
+        getIntent().replaceExtras(new Bundle());
+        getIntent().setData(null);
+        getIntent().setFlags(0);
         initView();
         loadComments();
     }
@@ -61,7 +68,7 @@ public class CommentScreen extends AppCompatActivity {
 
         initRecycler();
     }
-private Post mPost;
+
     private void uploadComment() {
         final DatabaseReference post = FirebaseDatabase.getInstance().getReference().child("post");
         post.addValueEventListener(new ValueEventListener() {
@@ -121,7 +128,8 @@ private Post mPost;
 
 
         final DatabaseReference commentss= FirebaseDatabase.getInstance().getReference();
-        final Query commentQuery = commentss.child("comments");
+        final Query commentQuery = commentss.child("comments").child(mPost.getKey()
+        );
 
         mAdapter = new FirebaseRecyclerAdapter<Comments, CommentViewHolder>(Comments.class , R.layout.item_comment , CommentViewHolder.class , commentQuery) {
             @Override
