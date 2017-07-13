@@ -60,7 +60,7 @@ public class RequestActivity extends AppCompatActivity {
                         request.child("request").child(cuid).child(reqRef).removeValue();
 
                         DatabaseReference followback = FirebaseDatabase.getInstance().getReference().child("follow").child(cuid).push();
-                        followback.child("followingid").setValue(req.getFrom());
+                        followback.child("followingid").setValue(req.getUid());
                         followback.child("followingname").setValue(req.getName());
                         followback.child("dp").setValue(req.getDp());
                         followback.child("state").setValue("following");
