@@ -79,7 +79,9 @@ public class MessageScreen extends AppCompatActivity {
 
     private User mUser;
     private void sendMessage() {
-
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm");
+        String strDate =   mdformat.format(calendar.getTime());
 
            String dp1 = following.getDp().toString();
         String  msg = messageEt.getText().toString();
@@ -89,12 +91,14 @@ public class MessageScreen extends AppCompatActivity {
         mAddmessage.child("data").setValue(msg);
         mAddmessage.child("senderUid").setValue(senderUid);
         mAddmessage.child("receiversUid").setValue(receivingUid);
+        mAddmessage.child("time").setValue(strDate);
 
 
         //now at receivers side the message should display
         mAddmessage = FirebaseDatabase.getInstance().getReference().child("message").child(receivingUid).child(senderUid).push();
         mAddmessage.child("data").setValue(msg);
         mAddmessage.child("dp").setValue(dp1);
+        mAddmessage.child("time").setValue(strDate);
 
 
         messageEt.setText("");
@@ -204,10 +208,8 @@ public class MessageScreen extends AppCompatActivity {
                         Picasso.with(dpin.getContext()).load(following.getDp()).into(dpin);
                     }
                     msgincome.setText(message.getData());
-                    Calendar calendar = Calendar.getInstance();
-                    SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm");
-                    String strDate =   mdformat.format(calendar.getTime());
-                    time.setText(strDate);
+                    time.setText(message.getTime());
+
 
                 }
 
@@ -236,11 +238,8 @@ public class MessageScreen extends AppCompatActivity {
                 public void bindToMessage(Message message, View.OnClickListener starClickListener) {
 
                     msg.setText(message.getData());
+                    time.setText(message.getTime());
 
-                    Calendar calendar = Calendar.getInstance();
-                    SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm");
-                    String strDate =   mdformat.format(calendar.getTime());
-                    time.setText(strDate);
 
                 }
 
@@ -249,5 +248,8 @@ public class MessageScreen extends AppCompatActivity {
 
         };
         mRecycler.setAdapter(mAdapter);
+
+
     }
+
 }

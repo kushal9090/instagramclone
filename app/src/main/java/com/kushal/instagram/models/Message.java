@@ -10,6 +10,15 @@ public class Message {
 
     }
 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    String time;
     public String getReceiversUid() {
         return receiversUid;
     }

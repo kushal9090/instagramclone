@@ -17,14 +17,18 @@ import android.widget.ImageButton;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.kushal.instagram.MainActivity;
 import com.kushal.instagram.R;
 import com.kushal.instagram.about.AboutActivity;
 import com.kushal.instagram.commentscreen.CommentScreen;
 import com.kushal.instagram.mesagescreen.MessageActivity;
+import com.kushal.instagram.models.LastComment;
 import com.kushal.instagram.models.Post;
 import com.kushal.instagram.postadd.PostAddActivity;
 import com.kushal.instagram.search.SearchActivity;
@@ -139,7 +143,7 @@ public class PostFragment extends Fragment{
         linearLayoutManager.setStackFromEnd(true);
         mPostRecycler.setLayoutManager(linearLayoutManager);
     }
-
+  private LastComment lc;
     private FirebaseRecyclerAdapter<Post , PostViewHolder> mAdapter;
     private void showPost() {
         final DatabaseReference pOST = FirebaseDatabase.getInstance().getReference();
@@ -173,6 +177,16 @@ public class PostFragment extends Fragment{
                          comments.putExtra(CommentScreen.EXTRA_DATA , post);
                          startActivity(comments);
 
+
+                     }
+                 });
+                 viewHolder.viewlastcomment.setOnClickListener(new View.OnClickListener() {
+                     @Override
+                     public void onClick(View view) {
+                         Intent comments = new Intent(getActivity() , CommentScreen.class);
+
+                         comments.putExtra(CommentScreen.EXTRA_DATA , post);
+                         startActivity(comments);
 
                      }
                  });

@@ -15,6 +15,7 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -51,6 +52,7 @@ public class PostAddActivity extends AppCompatActivity {
     private ImageView mPostPicUri;
     private ProgressDialog mProgress;
     private Button mPostbtn2;
+    private ImageButton mCLick;
     //constant to track image chooser intent
     private static final int PICK_IMAGE_REQUEST = 234;
     private User userget;
@@ -62,9 +64,10 @@ public class PostAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_add);
 
-        mPostbtn2 = (Button) findViewById(R.id.postbtn2);
+
         mPostButton = (Button) findViewById(R.id.postbutton);
         mProgress = new ProgressDialog(this);
+       mCLick = (ImageButton) findViewById(R.id.click);
 
         mdata = FirebaseDatabase.getInstance().getReference().child("post").push();
 
@@ -72,10 +75,10 @@ public class PostAddActivity extends AppCompatActivity {
 
         storageReference = FirebaseStorage.getInstance().getReference();
         mPostTitle = (EditText) findViewById(R.id.postTitle);
-     mPicuri = (EditText) findViewById(R.id.picuri);
+
         mPostPicUri = (ImageView) findViewById(R.id.postpicuri);
-        mUpload = (Button) findViewById(R.id.upload);
-        mUpload.setOnClickListener(new View.OnClickListener() {
+
+        mPostPicUri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showFileChooser();
@@ -87,51 +90,16 @@ public class PostAddActivity extends AppCompatActivity {
                 post();
             }
         });
-        mPostbtn2.setOnClickListener(new View.OnClickListener() {
+
+        mCLick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postTwo();
+                openCamera();
             }
         });
     }
     FirebaseUser fuser;
 
-    private void postTwo() {
-
-
-        String pic = mPicuri.getText().toString();
-        String title = mPostTitle.getText().toString();
-            FirebaseAuth mAuth = FirebaseAuth.getInstance();
-       String current_user = mAuth.getCurrentUser().getEmail();
-       DatabaseReference data2 = FirebaseDatabase.getInstance().getReference();
-        data2.child("email").setValue(current_user);
-        data2.child("posttitle").setValue(title);
-        data2.child("picuri").setValue(pic);
-
-        mPostTitle.setText("");
-
-        //particular user post..
-        String currentuser_uid = mAuth.getCurrentUser().getUid();
-        DatabaseReference userpost = FirebaseDatabase.getInstance().getReference().child("users_post").child(currentuser_uid).push();
-        userpost.child("email").setValue(current_user);
-        userpost.child("posttitle").setValue(title);
-        userpost.child("picuri").setValue(pic);
-
-
-        //mPostPicUri.setText(" ");
-        Intent back = new Intent(PostAddActivity.this , HomeScreenActivity.class);
-        startActivity(back);
-        Toast.makeText(PostAddActivity.this , "your post has been added" , Toast.LENGTH_LONG).show();
-        finish();
-        return;
-    }
-    private String usernameFromEmail(String email) {
-        if (email.contains("@")) {
-            return email.split("@")[0];
-        } else {
-            return email;
-        }
-    }
 
     private void showFileChooser() {
         Intent intent = new Intent();
@@ -139,6 +107,12 @@ public class PostAddActivity extends AppCompatActivity {
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent , PICK_IMAGE_REQUEST);
     }
+
+    private void openCamera() {
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 0);
+    }
+
 
     //converts to bitmap
     @Override
@@ -153,8 +127,7 @@ public class PostAddActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
-        }
+            }
     }
     //gets image extension
     public String getFileExtension(Uri uri) {

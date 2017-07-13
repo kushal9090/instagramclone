@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.kushal.instagram.homescreens.HomeScreenActivity;
 import com.kushal.instagram.homescreens.PostFragment;
 import com.kushal.instagram.models.Post;
+import com.kushal.instagram.postadd.PhoneVerification;
 
 public class RegiActivity extends AppCompatActivity {
     private EditText email , pass ;
@@ -86,6 +87,8 @@ public class RegiActivity extends AppCompatActivity {
                   // mDatabase.child("posts").push().setValue(post.getPicuri());
                     Intent intent = new Intent(RegiActivity.this , InfoActivity.class);
                     startActivity(intent);
+                 //   Intent intent = new Intent(RegiActivity.this , PhoneVerification.class);
+                  //  startActivity(intent);
 
 
                     Toast.makeText(RegiActivity.this, "successful....", Toast.LENGTH_SHORT).show();
@@ -93,6 +96,7 @@ public class RegiActivity extends AppCompatActivity {
                     return;
                 }else{
                     mPro.dismiss();
+
                     Toast.makeText(RegiActivity.this, "unsuccessful..", Toast.LENGTH_SHORT).show();
                     return;
                 }

@@ -23,15 +23,15 @@
         android:id="@+id/postTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/upload"
-        android:layout_alignStart="@+id/upload"
-        android:layout_below="@+id/postbutton"
-        android:layout_marginTop="28dp"
         android:background="@drawable/edittext_style"
         android:ems="10"
         android:hint="Write a caption.."
         android:inputType="textPersonName"
-        android:padding="20dp" />
+        android:padding="20dp"
+        android:layout_above="@+id/view2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="13dp" />
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -40,52 +40,17 @@
         android:background="@android:color/darker_gray"
         android:id="@+id/view2" />
 
-    <Button
-        android:id="@+id/upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="select Image"
-        android:backgroundTint="@android:color/holo_red_light"
-        android:layout_marginBottom="47dp"
-        android:textColor="@android:color/white"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
     <ImageView
         android:id="@+id/postpicuri"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         app:srcCompat="@drawable/profile"
-        android:layout_below="@+id/postbutton"
-        android:layout_toLeftOf="@+id/postTitle"
-        android:layout_toStartOf="@+id/postTitle"
-        android:layout_marginRight="15dp"
-        android:layout_marginEnd="15dp" />
-
-    <Button
-        android:id="@+id/postbtn2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Post using url"
-        android:backgroundTint="@android:color/white"
-        android:textColor="@color/facebook"
-        android:textStyle="bold"
-        android:layout_alignTop="@+id/picuri"
-        android:layout_alignRight="@+id/postpicuri"
-        android:layout_alignEnd="@+id/postpicuri" />
-
-    <EditText
-        android:id="@+id/picuri"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:ems="10"
-        android:padding="20dp"
-        android:inputType="textPersonName"
-        android:hint="paste url.."
-        android:layout_below="@+id/view2"
-        android:layout_alignLeft="@+id/postTitle"
-        android:layout_alignStart="@+id/postTitle" />
+        android:layout_below="@+id/toolbar5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="11dp" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar5"
@@ -97,4 +62,14 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:id="@+id/click"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="53dp"
+        android:backgroundTint="@color/cardview_light_background"
+        app:srcCompat="@drawable/ic_capture"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

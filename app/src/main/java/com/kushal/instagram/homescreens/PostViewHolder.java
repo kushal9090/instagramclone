@@ -29,8 +29,9 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
       private ImageView imagepost;
       private TextView posttitle;
       private TextView nameTv;
+      TextView viewlastcomment;
       private CircleImageView profileimg;
-       ImageView comment;
+      ImageView comment;
 
     public PostViewHolder(View itemView) {
         super(itemView);
@@ -39,6 +40,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         posttitle = (TextView) itemView.findViewById(R.id.postTitle);
         profileimg = (CircleImageView) itemView.findViewById(R.id.profile_image);
         comment = (ImageView) itemView.findViewById(R.id.commentIV);
+        viewlastcomment = (TextView) itemView.findViewById(R.id.viewComment);
     }
 
   public void bindToPost(Post post , View.OnClickListener startCLickListener){

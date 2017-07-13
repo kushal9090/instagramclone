@@ -1,11 +1,15 @@
 package com.kushal.instagram.commentscreen;
 
+import android.content.Intent;
 import android.nfc.Tag;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.kushal.instagram.R;
+import com.kushal.instagram.homescreens.HomeScreenActivity;
+import com.kushal.instagram.homescreens.PostFragment;
 import com.kushal.instagram.models.Comments;
 import com.kushal.instagram.models.Post;
 import com.kushal.instagram.models.User;
@@ -38,6 +44,8 @@ public class CommentScreen extends AppCompatActivity {
     private TextView ok ;
     private TextView nameparce , keyparce;
 
+    private FloatingActionButton fab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +60,19 @@ public class CommentScreen extends AppCompatActivity {
         initView();
         loadComments();
 
-        nameparce = (TextView) findViewById(R.id.nameparce);
-        nameparce.setText(mPost.getDisplayName());
 
-        keyparce = (TextView) findViewById(R.id.keyparce);
-        keyparce.setText(mPost.getKey());
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
 
+                NavUtils.navigateUpFromSameTask(this);
 
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
     private EditText commentET;
     private Button commentBtn;
@@ -78,9 +92,16 @@ public class CommentScreen extends AppCompatActivity {
     }
 
     private void uploadComment() {
+        final String cmntet = commentET.getText().toString();
+
         mCommentdb = FirebaseDatabase.getInstance().getReference().child("comments").child(mPost.getKey()).push();
 
-        final String cmntet = commentET.getText().toString();
+        //lastcomment to display
+        final DatabaseReference lastcomment = FirebaseDatabase.getInstance().getReference().child("lastcomments").child(mPost.getKey());
+        lastcomment.child("recent").setValue(cmntet);
+
+
+
         mAuth = FirebaseAuth.getInstance();
         String user_id = mAuth.getCurrentUser().getUid();
         final DatabaseReference user = FirebaseDatabase.getInstance().getReference().child("users").child(user_id);
@@ -90,6 +111,7 @@ public class CommentScreen extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User users = dataSnapshot.getValue(User.class);
                 //String author , profilePic , commnet ;
+                lastcomment.child("name").setValue(users.getDisplayName());
                 mCommentdb.child("author").setValue(users.getDisplayName());
                 mCommentdb.child("profilePic").setValue(users.getProfilePic());
                 mCommentdb.child("comment").setValue(cmntet);
@@ -138,4 +160,5 @@ public class CommentScreen extends AppCompatActivity {
         };
         commnetRecycler.setAdapter(mAdapter);
     }
+
 }
