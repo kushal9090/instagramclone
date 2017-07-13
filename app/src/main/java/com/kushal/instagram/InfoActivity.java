@@ -17,12 +17,16 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.kushal.instagram.homescreens.HomeScreenActivity;
+import com.kushal.instagram.models.User;
 import com.kushal.instagram.postadd.PostAddActivity;
 
 import java.io.IOException;
@@ -122,6 +126,33 @@ public class InfoActivity extends AppCompatActivity {
                 mdatabase.child("profilePic").setValue(photo);
                 mdatabase.child("displayName").setValue(display);
                 mdatabase.child("bio").setValue(about);
+
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                String uid = auth.getCurrentUser().getUid();
+                final DatabaseReference followPendings = FirebaseDatabase.getInstance().getReference().child("followPendings").child(uid).push();
+                followPendings.child("catch").setValue("exception");
+                DatabaseReference pendingUsers = FirebaseDatabase.getInstance().getReference().child("users");
+                pendingUsers.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User userlist = dataSnapshot.getValue(User.class);
+                        String name = userlist.getDisplayName();
+                        String id = userlist.getUid().toString();
+
+                        followPendings.child("displayName").setValue(name);
+                        followPendings.child("uid").setValue(id);
+
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
 
 
                 Intent next = new Intent(InfoActivity.this , MainActivity.class);

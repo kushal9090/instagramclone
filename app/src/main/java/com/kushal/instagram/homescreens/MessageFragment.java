@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.kushal.instagram.R;
+import com.kushal.instagram.mesagescreen.MessageViewHolder;
 import com.kushal.instagram.models.Following;
 import com.kushal.instagram.models.Post;
 import com.kushal.instagram.models.User;
@@ -48,19 +50,6 @@ public class MessageFragment extends Fragment {
         showUsers();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Following following = new Following();
-        UserViewholder uv = new UserViewholder(getView());
-
-        if(following.getState() != null){
-            uv.mFollow.setVisibility(GONE);
-        }else{
-
-        }
-
-    }
 
     private void initView() {
 
@@ -82,11 +71,16 @@ public class MessageFragment extends Fragment {
         adapter = new FirebaseRecyclerAdapter<User, UserViewholder>(User.class , R.layout.item_uers , UserViewholder.class , query) {
             @Override
             protected void populateViewHolder(final UserViewholder viewHolder,final User user,final int position) {
+
+
+
                viewHolder.mFollow.setOnClickListener(new View.OnClickListener() {
 
                    @Override
                    public void onClick(final View view) {
-                       FirebaseAuth auth = FirebaseAuth.getInstance();
+
+
+                                           FirebaseAuth auth = FirebaseAuth.getInstance();
                        String uid = auth.getCurrentUser().getUid();
                        DatabaseReference friends = FirebaseDatabase.getInstance().getReference().child("follow").child(uid).push();
                        friends.child("followingid").setValue(user.getUid());
@@ -94,9 +88,18 @@ public class MessageFragment extends Fragment {
                        friends.child("dp").setValue(user.getProfilePic());
                        friends.child("state").setValue("following");
 
+                       DatabaseReference counts = FirebaseDatabase.getInstance().getReference().child("counts").child(user.getUid());
+                       counts.child("nnumber").setValue("x");
+
+
+
+
+
                        String reqID = user.getUid().toString();
                        final DatabaseReference request = FirebaseDatabase.getInstance().getReference().child("request").child(reqID).push();
                        request.child("from").setValue(uid);
+                       request.child("dp").setValue(user.getProfilePic());
+                       request.child("uid").setValue(user.getUid());
 
                        DatabaseReference current_user = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
                        current_user.addValueEventListener(new ValueEventListener() {
@@ -145,6 +148,7 @@ public class MessageFragment extends Fragment {
         };
 
         userrecycle.setAdapter(adapter);
+
     }
 
 }

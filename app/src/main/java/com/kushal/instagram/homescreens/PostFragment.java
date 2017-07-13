@@ -14,9 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,8 +30,10 @@ import com.kushal.instagram.R;
 import com.kushal.instagram.about.AboutActivity;
 import com.kushal.instagram.commentscreen.CommentScreen;
 import com.kushal.instagram.mesagescreen.MessageActivity;
+import com.kushal.instagram.models.Counts;
 import com.kushal.instagram.models.LastComment;
 import com.kushal.instagram.models.Post;
+import com.kushal.instagram.models.User;
 import com.kushal.instagram.postadd.PostAddActivity;
 import com.kushal.instagram.requests.RequestActivity;
 import com.kushal.instagram.search.SearchActivity;
@@ -39,18 +43,22 @@ import com.kushal.instagram.search.SearchActivity;
  */
 
 public class PostFragment extends Fragment{
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.post_fragment , container , false);
+
+
     }
     EditText title;
     ImageButton postbtn;
     ImageButton msgBtn;
+    private TextView countis;
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        DatabaseReference postkey = FirebaseDatabase.getInstance().getReference().child("post");
 
 
         initView();
@@ -64,13 +72,24 @@ public class PostFragment extends Fragment{
         initMessages();
         initSearch();
         initNotifications();
+
     }
+
+
+
+
+
+
 
     private void initNotifications() {
    ImageButton noti = (ImageButton) getView().findViewById(R.id.notificationBtn);
         noti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                DatabaseReference count = FirebaseDatabase.getInstance().getReference();
+                  count.child("counts").child(uid).removeValue();
+
                 Intent i = new Intent(getActivity() , RequestActivity.class);
                 startActivity(i);
 
