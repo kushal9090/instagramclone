@@ -31,6 +31,7 @@ import com.kushal.instagram.mesagescreen.MessageActivity;
 import com.kushal.instagram.models.LastComment;
 import com.kushal.instagram.models.Post;
 import com.kushal.instagram.postadd.PostAddActivity;
+import com.kushal.instagram.requests.RequestActivity;
 import com.kushal.instagram.search.SearchActivity;
 
 /**
@@ -62,6 +63,19 @@ public class PostFragment extends Fragment{
         initLogout();
         initMessages();
         initSearch();
+        initNotifications();
+    }
+
+    private void initNotifications() {
+   ImageButton noti = (ImageButton) getView().findViewById(R.id.notificationBtn);
+        noti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity() , RequestActivity.class);
+                startActivity(i);
+
+            }
+        });
     }
 
     private void initSearch() {

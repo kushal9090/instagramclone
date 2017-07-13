@@ -94,6 +94,25 @@ public class MessageFragment extends Fragment {
                        friends.child("dp").setValue(user.getProfilePic());
                        friends.child("state").setValue("following");
 
+                       String reqID = user.getUid().toString();
+                       final DatabaseReference request = FirebaseDatabase.getInstance().getReference().child("request").child(reqID).push();
+                       request.child("from").setValue(uid);
+
+                       DatabaseReference current_user = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+                       current_user.addValueEventListener(new ValueEventListener() {
+                           @Override
+                           public void onDataChange(DataSnapshot dataSnapshot) {
+                                User current = dataSnapshot.getValue(User.class);
+                               String currentname = current.getDisplayName();
+                               request.child("name").setValue(currentname);
+                           }
+
+                           @Override
+                           public void onCancelled(DatabaseError databaseError) {
+
+                           }
+                       });
+
                        //.....
                       // viewHolder.mTitle.setText(fol.getState()+"you");
                        friends.addValueEventListener(new ValueEventListener() {

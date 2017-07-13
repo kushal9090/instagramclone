@@ -155,13 +155,13 @@
             app:srcCompat="@drawable/ic_search_black_48dp" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/notificationBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="2dp"
             android:layout_marginLeft="23dp"
             android:layout_marginStart="23dp"
+            android:layout_marginTop="2dp"
             android:layout_toEndOf="@+id/postbtn"
             android:layout_toRightOf="@+id/postbtn"
             android:background="@color/common_google_signin_btn_text_dark_focused"
