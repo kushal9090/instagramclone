@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.kushal.instagram.MainActivity;
 import com.kushal.instagram.R;
+
 import com.kushal.instagram.about.AboutActivity;
 import com.kushal.instagram.commentscreen.CommentScreen;
 import com.kushal.instagram.mesagescreen.MessageActivity;
@@ -37,6 +40,8 @@ import com.kushal.instagram.models.User;
 import com.kushal.instagram.postadd.PostAddActivity;
 import com.kushal.instagram.requests.RequestActivity;
 import com.kushal.instagram.search.SearchActivity;
+
+import junit.framework.Test;
 
 /**
  * Created by kusha on 7/6/2017.
@@ -59,7 +64,7 @@ public class PostFragment extends Fragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        countis = (TextView) getView().findViewById(R.id.countnoti);
 
         initView();
         showPost();
@@ -72,14 +77,26 @@ public class PostFragment extends Fragment{
         initMessages();
         initSearch();
         initNotifications();
+        initHome();
 
     }
 
+    private void initHome() {
+    ImageButton home = (ImageButton) getView().findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // startActivity(i);
 
+            }
+        });
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
 
-
-
+    }
 
     private void initNotifications() {
    ImageButton noti = (ImageButton) getView().findViewById(R.id.notificationBtn);
@@ -182,14 +199,18 @@ public class PostFragment extends Fragment{
         final DatabaseReference pOST = FirebaseDatabase.getInstance().getReference();
         Query postQuery = pOST.child("post");
 
-        mAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(Post.class , R.layout.item_post , PostViewHolder.class , postQuery) {
+        mAdapter = new FirebaseRecyclerAdapter<Post, PostViewHolder>(Post.class, R.layout.item_post, PostViewHolder.class, postQuery) {
+
+
+
+
             @Override
-            protected void populateViewHolder(final PostViewHolder viewHolder,final Post post,final int position) {
+            protected void populateViewHolder(final PostViewHolder viewHolder, final Post post, final int position) {
                 final DatabaseReference postRef = getRef(position);
-
-
                 // Set click listener for the whole post view
                 final String postKey = postRef.getKey();
+
+
                 DatabaseReference pt = FirebaseDatabase.getInstance().getReference().child("post").child(postKey);
                 pt.child("key").setValue(postKey);
 
@@ -200,29 +221,30 @@ public class PostFragment extends Fragment{
                     }
                 });
 
+
                 //comment window..
-                 viewHolder.comment.setOnClickListener(new View.OnClickListener() {
-                     @Override
-                     public void onClick(View view) {
+                viewHolder.comment.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
-                         Intent comments = new Intent(getActivity() , CommentScreen.class);
+                        Intent comments = new Intent(getActivity(), CommentScreen.class);
 
-                         comments.putExtra(CommentScreen.EXTRA_DATA , post);
-                         startActivity(comments);
+                        comments.putExtra(CommentScreen.EXTRA_DATA, post);
+                        startActivity(comments);
 
 
-                     }
-                 });
-                 viewHolder.viewlastcomment.setOnClickListener(new View.OnClickListener() {
-                     @Override
-                     public void onClick(View view) {
-                         Intent comments = new Intent(getActivity() , CommentScreen.class);
+                    }
+                });
+                viewHolder.viewlastcomment.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent comments = new Intent(getActivity(), CommentScreen.class);
 
-                         comments.putExtra(CommentScreen.EXTRA_DATA , post);
-                         startActivity(comments);
+                        comments.putExtra(CommentScreen.EXTRA_DATA, post);
+                        startActivity(comments);
 
-                     }
-                 });
+                    }
+                });
 
 
                 viewHolder.bindToPost(post, new View.OnClickListener() {
@@ -230,13 +252,22 @@ public class PostFragment extends Fragment{
                     public void onClick(View view) {
 
 
-
-
                     }
                 });
             }
         };
         mPostRecycler.setAdapter(mAdapter);
+        mPostRecycler.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int positionView = ((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+                int add = positionView + 1 ;
+              //  countis.setText(Integer.toString(add)); //The TextView you want to update
+            }
+        });
+
+     //   countis.setText(count);
 
     }
 

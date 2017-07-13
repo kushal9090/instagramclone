@@ -78,6 +78,7 @@ public class RequestActivity extends AppCompatActivity {
             }
         };
        reqRecycler.setAdapter(mAdapter);
+            mAdapter.getItemCount();
 
     }
 }

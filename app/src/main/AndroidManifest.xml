@@ -56,7 +56,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".about.EditProfileActivity" />
         <activity android:name=".postadd.PhoneVerification" />
-        <activity android:name=".requests.RequestActivity"></activity>
+        <activity android:name=".requests.RequestActivity" />
+        <activity android:name=".TestActivity"></activity>
     </application>
 
 </manifest>
