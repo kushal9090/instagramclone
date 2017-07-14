@@ -10,6 +10,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -45,6 +46,7 @@ import com.kushal.instagram.requests.RequestActivity;
 import com.kushal.instagram.search.SearchActivity;
 import com.kushal.instagram.story.StoryActivity;
 import com.kushal.instagram.story.StoryScreenActivity;
+import com.squareup.picasso.Picasso;
 
 import junit.framework.Test;
 
@@ -321,7 +323,27 @@ public class PostFragment extends Fragment{
     }
 
     private void initAddStory(){
-        CircleImageView addstory  = (CircleImageView) getView().findViewById(R.id.addstory);
+        final CircleImageView addstory  = (CircleImageView) getView().findViewById(R.id.addstory);
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference usr = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+        usr.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+
+                if(!TextUtils.isEmpty(user.getProfilePic())){
+                    Picasso.with(addstory.getContext()).load(user.getProfilePic()).into(addstory);
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         addstory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

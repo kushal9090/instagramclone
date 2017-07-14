@@ -21,8 +21,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            >
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -37,8 +36,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="17dp"
                     android:layout_marginStart="17dp"
-                    app:srcCompat="@android:drawable/ic_menu_camera"
-                    />
+                    app:srcCompat="@android:drawable/ic_menu_camera" />
 
                 <TextView
                     android:id="@+id/textView"
@@ -46,23 +44,23 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
+                    android:fontFamily="cursive"
                     android:text="Instagram"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
-                    android:fontFamily="cursive"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <ImageButton
                     android:id="@+id/imageButtonMsg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@android:drawable/ic_menu_send"
-                    android:background="@android:color/white"
-                    android:layout_alignTop="@+id/imageView"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/imageView"
+                    android:layout_marginEnd="18dp"
                     android:layout_marginRight="18dp"
-                    android:layout_marginEnd="18dp" />
+                    android:background="@android:color/white"
+                    app:srcCompat="@android:drawable/ic_menu_send" />
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/logout"
@@ -89,13 +87,12 @@
         android:id="@+id/addstory"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_below="@+id/appbar"
+        android:layout_marginTop="15dp"
         android:src="@drawable/instausericon"
         app:civ_border_color="#FF000000"
-        app:civ_border_width="2dp"
-        android:layout_below="@+id/appbar"
-        android:layout_alignRight="@+id/textView9"
-        android:layout_alignEnd="@+id/textView9"
-        android:layout_marginTop="15dp" />
+
+        app:civ_border_width="2dp" />
 
     <android.support.v7.widget.RecyclerView
 
@@ -104,12 +101,14 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView9"
         android:layout_below="@+id/appbar"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/addstory"
+        android:background="@color/common_google_signin_btn_text_dark_disabled"
         android:scrollbars="none"
         tools:listitem="@layout/item_story">
 
     </android.support.v7.widget.RecyclerView>
+
     <android.support.design.internal.ScrimInsetsFrameLayout
         android:id="@+id/frame"
         android:layout_width="match_parent"
@@ -139,8 +138,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="4dp"
-        android:background="@color/common_google_signin_btn_text_dark_default"
-        >
+        android:background="@color/common_google_signin_btn_text_dark_default">
 
         <View
             android:layout_width="match_parent"
@@ -178,9 +176,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="2dp"
             android:layout_marginEnd="28dp"
             android:layout_marginRight="28dp"
+            android:layout_marginTop="2dp"
             android:layout_toLeftOf="@+id/postbtn"
             android:layout_toStartOf="@+id/postbtn"
             android:backgroundTint="@color/common_google_signin_btn_text_dark_default"
@@ -190,14 +188,14 @@
             android:id="@+id/notificationBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_marginLeft="25dp"
             android:layout_marginStart="25dp"
+            android:layout_toEndOf="@+id/postbtn"
+            android:layout_toRightOf="@+id/postbtn"
             android:background="@color/common_google_signin_btn_text_dark_focused"
             android:backgroundTint="@color/common_google_signin_btn_text_dark_default"
-            app:srcCompat="@drawable/ic_icon_heart"
-            android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/postbtn"
-            android:layout_toEndOf="@+id/postbtn" />
+            app:srcCompat="@drawable/ic_icon_heart" />
 
 
     </RelativeLayout>
@@ -216,14 +214,14 @@
         android:id="@+id/countnoti"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/frame"
+        android:layout_marginEnd="82dp"
+        android:layout_marginRight="82dp"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_below="@+id/frame"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="82dp"
-        android:layout_marginEnd="82dp" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView9"
@@ -232,10 +230,25 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/addstory"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="1dp"
-        android:text="Add Story" />
-    >
+        android:text="You"
 
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/storyRecycler"
+        android:layout_alignEnd="@+id/home"
+        android:layout_alignRight="@+id/home"
+        android:layout_marginBottom="11dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:backgroundTint="@color/facebook"
+        app:srcCompat="@android:drawable/ic_menu_add" />
+    >
 
 
 </RelativeLayout>
