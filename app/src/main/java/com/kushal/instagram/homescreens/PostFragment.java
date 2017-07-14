@@ -48,6 +48,9 @@ import com.kushal.instagram.story.StoryScreenActivity;
 
 import junit.framework.Test;
 
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -95,7 +98,13 @@ public class PostFragment extends Fragment{
         initView();
         showPost();
         showStory();
+        deletStory();
     }
+
+    private void deletStory() {
+
+    }
+
     private void initView() {
         initAbout();
         initPostbtn();
@@ -339,6 +348,10 @@ public class PostFragment extends Fragment{
                        String key = sKey.getKey();
                        DatabaseReference storyKey = FirebaseDatabase.getInstance().getReference().child("story").child(key);
                        storyKey.child("key").setValue(key);
+
+
+
+
 
                 viewHolder.mStoryPic.setOnClickListener(new View.OnClickListener() {
                     @Override

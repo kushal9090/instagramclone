@@ -18,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -112,7 +113,7 @@ public class StoryActivity extends AppCompatActivity {
 
                 String pic = taskSnapshot.getDownloadUrl().toString();
                 mStoryDatabse.child("story").setValue(pic);
-
+                mStoryDatabse.child("timestamp").setValue(ServerValue.TIMESTAMP);
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
                 DatabaseReference info = FirebaseDatabase.getInstance().getReference().child("users").child(uid);

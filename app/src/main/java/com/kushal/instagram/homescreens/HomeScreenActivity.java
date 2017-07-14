@@ -133,12 +133,14 @@ public class HomeScreenActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             switch (position){
-                case 0 :  CameraFragment callsFragment = new CameraFragment();
-                    return callsFragment;
-                case 1 : PostFragment imageFragment = new PostFragment();
+                case 0 : PostFragment imageFragment = new PostFragment();
                     return imageFragment;
-                case 2:  MessageFragment messageFragment= new MessageFragment();
+
+                case 1:  MessageFragment messageFragment= new MessageFragment();
                     return messageFragment;
+
+                case 2 :  CameraFragment callsFragment = new CameraFragment();
+                    return callsFragment;
             }
             return null;
         }

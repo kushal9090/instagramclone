@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -107,7 +108,7 @@ public class MessageScreen extends AppCompatActivity {
     private void loadChat() {
         String current_user = mAuth.getCurrentUser().getUid();
         String receivingUid = following.getFollowingid().toString();
-        DatabaseReference m = FirebaseDatabase.getInstance().getReference();
+        final DatabaseReference m = FirebaseDatabase.getInstance().getReference();
         Query mQuery = m.child("message").child(current_user).child(receivingUid);
 
         mAdapter = new FirebaseRecyclerAdapter<Message, RecyclerView.ViewHolder>(Message.class , R.layout.item_chat , RecyclerView.ViewHolder.class
@@ -118,6 +119,15 @@ public class MessageScreen extends AppCompatActivity {
 
             @Override
             protected void populateViewHolder(final RecyclerView.ViewHolder viewHolder,final Message message,final int position) {
+
+                DatabaseReference messageKey = getRef(position);
+                String mKey = messageKey.getKey();
+                String receivingUid = following.getFollowingid().toString();
+                String senderUid = mAuth.getCurrentUser().getUid();
+                DatabaseReference m = FirebaseDatabase.getInstance().getReference().child("message").child(senderUid).child(receivingUid).child(mKey);
+                m.child("key").setValue(mKey);
+
+
                 if (messageFromCurrentUser(message)) {
                     populateOutgoingViewHolder((OutgoingViewHolder) viewHolder, message);
                 } else {
@@ -239,7 +249,15 @@ public class MessageScreen extends AppCompatActivity {
 
                     msg.setText(message.getData());
                     time.setText(message.getTime());
+                    msg.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View view) {
 
+
+                            Toast.makeText(MessageScreen.this, "deleted", Toast.LENGTH_SHORT).show();
+                            return false;
+                        }
+                    });
 
                 }
 
