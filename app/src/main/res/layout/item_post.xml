@@ -26,7 +26,7 @@
              android:layout_marginLeft="3dp"
              android:layout_marginStart="3dp"
              android:layout_marginTop="19dp"
-             android:layout_toRightOf="@+id/profile_image"
+             android:layout_toRightOf="@+id/storypic"
              android:text="name"
              android:textColor="@android:color/black"
              android:textSize="20sp"
@@ -81,7 +81,7 @@
              />
 
          <de.hdodenhof.circleimageview.CircleImageView
-             android:id="@+id/profile_image"
+             android:id="@+id/storypic"
              android:layout_width="50dp"
              android:layout_height="50dp"
              android:src="@drawable/instausericon"

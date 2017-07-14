@@ -1,21 +1,14 @@
 package com.kushal.instagram.homescreens;
 
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.kushal.instagram.R;
 import com.kushal.instagram.models.Post;
-import com.kushal.instagram.models.User;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -38,7 +31,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         nameTv = (TextView) itemView.findViewById(R.id.nametv);
         imagepost = (ImageView) itemView.findViewById(R.id.imagepost);
         posttitle = (TextView) itemView.findViewById(R.id.postTitle);
-        profileimg = (CircleImageView) itemView.findViewById(R.id.profile_image);
+        profileimg = (CircleImageView) itemView.findViewById(R.id.storypic);
         comment = (ImageView) itemView.findViewById(R.id.commentIV);
         viewlastcomment = (TextView) itemView.findViewById(R.id.viewComment);
     }

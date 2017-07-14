@@ -18,7 +18,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.kushal.instagram.R;
-import com.kushal.instagram.models.Following;
 import com.kushal.instagram.models.SingleUserpost;
 import com.kushal.instagram.models.User;
 import com.squareup.picasso.Picasso;
@@ -39,7 +38,7 @@ public class AboutActivity extends AppCompatActivity {
         initRecycler();
         showUserPics();
         bio = (TextView) findViewById(R.id.bio);
-        profileimg = (CircleImageView) findViewById(R.id.profile_image);
+        profileimg = (CircleImageView) findViewById(R.id.storypic);
         followingtv = (TextView) findViewById(R.id.followtv);
         countFollowing = (TextView) findViewById(R.id.countFollowing);
         nameTv = (TextView) findViewById(R.id.nameTV);

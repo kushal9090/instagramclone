@@ -10,7 +10,7 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/profile_image"
+        android:id="@+id/storypic"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:src="@drawable/instausericon"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/profile_image"
+        android:layout_alignTop="@+id/storypic"
         android:layout_marginEnd="51dp"
         android:layout_marginRight="51dp"
         android:layout_marginTop="23dp"
@@ -61,7 +61,7 @@
         android:id="@+id/editprofiletv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/profile_image"
+        android:layout_alignBottom="@+id/storypic"
         android:layout_toEndOf="@+id/posttv"
         android:layout_toRightOf="@+id/posttv"
         android:text="Edit your profile" />
@@ -75,9 +75,9 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
-        android:layout_below="@+id/profile_image"
-        android:layout_alignLeft="@+id/profile_image"
-        android:layout_alignStart="@+id/profile_image" />
+        android:layout_below="@+id/storypic"
+        android:layout_alignLeft="@+id/storypic"
+        android:layout_alignStart="@+id/storypic" />
     <TextView
         android:id="@+id/bio"
         android:layout_below="@+id/nameTV"

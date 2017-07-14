@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -37,12 +38,17 @@ import com.kushal.instagram.models.Counts;
 import com.kushal.instagram.models.Following;
 import com.kushal.instagram.models.LastComment;
 import com.kushal.instagram.models.Post;
+import com.kushal.instagram.models.Story;
 import com.kushal.instagram.models.User;
 import com.kushal.instagram.postadd.PostAddActivity;
 import com.kushal.instagram.requests.RequestActivity;
 import com.kushal.instagram.search.SearchActivity;
+import com.kushal.instagram.story.StoryActivity;
+import com.kushal.instagram.story.StoryScreenActivity;
 
 import junit.framework.Test;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by kusha on 7/6/2017.
@@ -88,6 +94,7 @@ public class PostFragment extends Fragment{
 
         initView();
         showPost();
+        showStory();
     }
     private void initView() {
         initAbout();
@@ -98,8 +105,21 @@ public class PostFragment extends Fragment{
         initSearch();
         initNotifications();
         initHome();
+        initStoryRecycler();
+        initAddStory();
 
     }
+    private RecyclerView mStoryRecycler;
+    private void initStoryRecycler() {
+
+        mStoryRecycler = (RecyclerView) getView().findViewById(R.id.storyRecycler);
+//        mStoryRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+         LinearLayoutManager mLinear = new LinearLayoutManager(getActivity() , LinearLayoutManager.HORIZONTAL , false );
+        mLinear.setReverseLayout(true);
+        mLinear.setStackFromEnd(true);
+        mStoryRecycler.setLayoutManager(mLinear);
+
+          }
 
     private void initHome() {
     ImageButton home = (ImageButton) getView().findViewById(R.id.home);
@@ -289,6 +309,55 @@ public class PostFragment extends Fragment{
 
      //   countis.setText(count);
 
+    }
+
+    private void initAddStory(){
+        CircleImageView addstory  = (CircleImageView) getView().findViewById(R.id.addstory);
+        addstory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent o = new Intent(getActivity() , StoryActivity.class);
+                startActivity(o);
+
+            }
+        });
+
+
+    }
+
+
+ private  FirebaseRecyclerAdapter<Story , StoryHolder> storyAdapter;
+    private void showStory(){
+
+    DatabaseReference story = FirebaseDatabase.getInstance().getReference();
+        Query query = story.child("story");
+
+        storyAdapter = new FirebaseRecyclerAdapter<Story, StoryHolder>(Story.class , R.layout.item_story , StoryHolder.class , query) {
+            @Override
+            protected void populateViewHolder(final StoryHolder viewHolder,final Story story,final int position) {
+                       DatabaseReference sKey = getRef(position);
+                       String key = sKey.getKey();
+                       DatabaseReference storyKey = FirebaseDatabase.getInstance().getReference().child("story").child(key);
+                       storyKey.child("key").setValue(key);
+
+                viewHolder.mStoryPic.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                               Intent screen = new Intent(getActivity() , StoryScreenActivity.class);
+                               screen.putExtra(StoryScreenActivity.EXTRA_DATA , story);
+                              startActivity(screen);
+                    }
+                });
+
+                viewHolder.bind(story, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+            }
+        };
+        mStoryRecycler.setAdapter(storyAdapter);
     }
 
 
