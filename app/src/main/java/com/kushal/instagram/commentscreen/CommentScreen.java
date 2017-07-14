@@ -96,6 +96,8 @@ public class CommentScreen extends AppCompatActivity {
 
         mCommentdb = FirebaseDatabase.getInstance().getReference().child("comments").child(mPost.getKey()).push();
 
+
+
         //lastcomment to display
         final DatabaseReference lastcomment = FirebaseDatabase.getInstance().getReference().child("lastcomments").child(mPost.getKey());
         lastcomment.child("recent").setValue(cmntet);
@@ -116,6 +118,10 @@ public class CommentScreen extends AppCompatActivity {
                 mCommentdb.child("profilePic").setValue(users.getProfilePic());
                 mCommentdb.child("comment").setValue(cmntet);
                 commentET.setText("");
+
+                DatabaseReference counts = FirebaseDatabase.getInstance().getReference().child("counts").child(users.getUid());
+                counts.child("nnumber").setValue("1");
+
             }
 
             @Override

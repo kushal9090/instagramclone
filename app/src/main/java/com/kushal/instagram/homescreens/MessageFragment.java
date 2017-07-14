@@ -119,7 +119,7 @@ public class MessageFragment extends Fragment {
 
 
                                                    viewHolder.mFollow.setText("Following");
-                                               
+
                                            }
                                        });
                                        DatabaseReference current_user = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
@@ -145,7 +145,7 @@ public class MessageFragment extends Fragment {
                                }
                            });
                            DatabaseReference counts = FirebaseDatabase.getInstance().getReference().child("counts").child(user.getUid());
-                           counts.child("nnumber").setValue("x");
+                           counts.child("nnumber").setValue("1");
 
 
                            //.....

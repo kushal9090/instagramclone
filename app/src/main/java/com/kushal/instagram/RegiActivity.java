@@ -95,6 +95,10 @@ public class RegiActivity extends AppCompatActivity {
                   //  startActivity(intent);
 
 
+                    //notification access
+                    DatabaseReference counts = FirebaseDatabase.getInstance().getReference().child("counts").child(uid);
+                    counts.child("nnumber").setValue("");
+
                     //get user list
 
                     Intent intent = new Intent(RegiActivity.this , InfoActivity.class);

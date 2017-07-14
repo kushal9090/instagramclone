@@ -34,6 +34,7 @@ import com.kushal.instagram.about.AboutActivity;
 import com.kushal.instagram.commentscreen.CommentScreen;
 import com.kushal.instagram.mesagescreen.MessageActivity;
 import com.kushal.instagram.models.Counts;
+import com.kushal.instagram.models.Following;
 import com.kushal.instagram.models.LastComment;
 import com.kushal.instagram.models.Post;
 import com.kushal.instagram.models.User;
@@ -60,11 +61,30 @@ public class PostFragment extends Fragment{
     ImageButton postbtn;
     ImageButton msgBtn;
     private TextView countis;
-
+    private Following following;
+    private FirebaseAuth a;
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         countis = (TextView) getView().findViewById(R.id.countnoti);
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference count = FirebaseDatabase.getInstance().getReference().child("counts").child(uid);
+
+
+        count.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Counts c = dataSnapshot.getValue(Counts.class);
+                // String cc = c.getNnumber();
+                countis.setText(c.getNnumber());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         initView();
         showPost();
@@ -105,7 +125,7 @@ public class PostFragment extends Fragment{
             public void onClick(View view) {
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 DatabaseReference count = FirebaseDatabase.getInstance().getReference();
-                  count.child("counts").child(uid).removeValue();
+                  count.child("counts").child(uid).child("nnumber").setValue("");
 
                 Intent i = new Intent(getActivity() , RequestActivity.class);
                 startActivity(i);
@@ -210,7 +230,7 @@ public class PostFragment extends Fragment{
                 // Set click listener for the whole post view
                 final String postKey = postRef.getKey();
 
-
+                //set key to users post
                 DatabaseReference pt = FirebaseDatabase.getInstance().getReference().child("post").child(postKey);
                 pt.child("key").setValue(postKey);
 
@@ -246,7 +266,6 @@ public class PostFragment extends Fragment{
                     }
                 });
 
-
                 viewHolder.bindToPost(post, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -254,7 +273,8 @@ public class PostFragment extends Fragment{
 
                     }
                 });
-            }
+               }
+
         };
         mPostRecycler.setAdapter(mAdapter);
         mPostRecycler.setOnScrollListener(new RecyclerView.OnScrollListener() {

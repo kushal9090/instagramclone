@@ -137,10 +137,10 @@ public class InfoActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User userlist = dataSnapshot.getValue(User.class);
                         String name = userlist.getDisplayName();
-                        String id = userlist.getUid().toString();
+                      //  String id = userlist.getUid().toString();
 
                         followPendings.child("displayName").setValue(name);
-                        followPendings.child("uid").setValue(id);
+                        followPendings.child("uid").setValue(userlist.getUid());
 
 
 

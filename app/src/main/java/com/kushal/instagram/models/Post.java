@@ -16,6 +16,15 @@ public class Post implements Parcelable{
     String posttitle;
     String displayName;
 
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    String uid;
     protected Post(Parcel in) {
         posttitle = in.readString();
         displayName = in.readString();
@@ -23,6 +32,7 @@ public class Post implements Parcelable{
         profilePic = in.readString();
         email = in.readString();
         picuri = in.readString();
+        uid = in.readString();
     }
 
     public static final Creator<Post> CREATOR = new Creator<Post>() {
@@ -105,5 +115,6 @@ public class Post implements Parcelable{
         parcel.writeString(profilePic);
         parcel.writeString(email);
         parcel.writeString(picuri);
+        parcel.writeString(uid);
     }
 }

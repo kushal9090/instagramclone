@@ -172,7 +172,8 @@ public class PostAddActivity extends AppCompatActivity {
 
                         mdata.child("profilePic").setValue(name.getProfilePic());
                         mdata.child("displayName").setValue(name.getDisplayName());
-                                            }
+
+                    }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
@@ -186,18 +187,19 @@ public class PostAddActivity extends AppCompatActivity {
 
                 String current_user = mAuth.getCurrentUser().getEmail();
                 String title = mPostTitle.getText().toString();
-
+                String currentuser_uid = mAuth.getCurrentUser().getUid();
 
                 mdata.child("email").setValue(current_user);
                 mdata.child("posttitle").setValue(title);
                 mdata.child("picuri").setValue(photo);
+                mdata.child("uid").setValue(currentuser_uid);
                 //  mdata.child("picuri").setValue(picuri);
                 mPostTitle.setText("");
                 //mPostPicUri.setText(" ");
 
 
                 //particular user post..
-                String currentuser_uid = mAuth.getCurrentUser().getUid();
+
                 DatabaseReference userpost = FirebaseDatabase.getInstance().getReference().child("users_post").child(currentuser_uid).push();
                 userpost.child("email").setValue(current_user);
                 userpost.child("posttitle").setValue(title);
