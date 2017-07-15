@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +34,7 @@ public class StoryScreenActivity extends AppCompatActivity {
     private TextView name;
 
     private Story story;
+    private ProgressBar pro ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,9 @@ public class StoryScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_story_screen);
         Bundle bundle = getIntent().getExtras();
         story = bundle.getParcelable(EXTRA_DATA);
+
+        pro = (ProgressBar) findViewById(R.id.pro);
+
 
 //  timing for automatic deletion of a story.....
 
@@ -63,6 +68,8 @@ public class StoryScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                pro.setProgress(100);
+
                 Intent i = new Intent(StoryScreenActivity.this, HomeScreenActivity.class);
                 startActivity(i);
                 finish();

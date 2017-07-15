@@ -56,13 +56,16 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".about.EditProfileActivity" />
         <activity android:name=".postadd.PhoneVerification" />
-        <activity android:name=".requests.RequestActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-        <activity android:name=".story.StoryActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".story.StoryScreenActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".requests.RequestActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".story.StoryActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".story.StoryScreenActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Test"></activity>
     </application>
 
 </manifest>

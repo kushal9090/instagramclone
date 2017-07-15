@@ -40,5 +40,19 @@
         android:textSize="18sp"
         android:text="unknown" />
 
+    <ProgressBar
+        android:id="@+id/pro"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+
+        android:layout_height="1dp"
+        android:layout_below="@+id/name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:max="100"
+        android:progress="100"
+        android:progressDrawable="?attr/colorBackgroundFloating"
+        android:progressTint="@color/facebook" />
+
 
 </RelativeLayout>

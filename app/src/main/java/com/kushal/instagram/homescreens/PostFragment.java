@@ -137,7 +137,8 @@ public class PostFragment extends Fragment{
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // startActivity(i);
+                //Intent i = new Intent(getActivity() , com.kushal.instagram.Test.class);
+                 //startActivity(i);
 
             }
         });

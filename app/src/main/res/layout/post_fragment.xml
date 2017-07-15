@@ -103,7 +103,7 @@
         android:layout_below="@+id/appbar"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/addstory"
-        android:background="@color/common_google_signin_btn_text_dark_disabled"
+        android:background="@android:color/white"
         android:scrollbars="none"
         tools:listitem="@layout/item_story">
 
