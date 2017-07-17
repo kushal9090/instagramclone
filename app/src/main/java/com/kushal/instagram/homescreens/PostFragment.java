@@ -44,6 +44,7 @@ import com.kushal.instagram.models.User;
 import com.kushal.instagram.postadd.PostAddActivity;
 import com.kushal.instagram.requests.RequestActivity;
 import com.kushal.instagram.search.SearchActivity;
+import com.kushal.instagram.singleuserinfo.SingleUserInfoActivity;
 import com.kushal.instagram.story.StoryActivity;
 import com.kushal.instagram.story.StoryScreenActivity;
 import com.squareup.picasso.Picasso;
@@ -51,6 +52,7 @@ import com.squareup.picasso.Picasso;
 import junit.framework.Test;
 
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -74,21 +76,36 @@ public class PostFragment extends Fragment{
     private TextView countis;
     private Following following;
     private FirebaseAuth a;
+    private RecyclerView mStoryRecycler;
+    private ImageButton noti;
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         countis = (TextView) getView().findViewById(R.id.countnoti);
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference count = FirebaseDatabase.getInstance().getReference().child("counts").child(uid);
-
+        noti = (ImageButton) getView().findViewById(R.id.notificationBtn);
 
         count.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Counts c = dataSnapshot.getValue(Counts.class);
                 // String cc = c.getNnumber();
-                countis.setText(c.getNnumber());
+                // countis.setText(c.getNnumber());
+                if(c.getNnumber().equals("")){
+                    noti.setImageResource(R.drawable.ic_icon_heart);
+                }
+
+                if(c.getNnumber().equals("1")){
+
+                    noti.setImageResource(R.drawable.ic_person_black_48dp);
+                }
+
+                if(c.getNnumber().equals("2")){
+                    noti.setImageResource(R.drawable.ic_chat_bubble_black_48dp);
+                }
             }
 
             @Override
@@ -96,6 +113,7 @@ public class PostFragment extends Fragment{
 
             }
         });
+
 
         initView();
         showPost();
@@ -120,7 +138,7 @@ public class PostFragment extends Fragment{
         initAddStory();
 
     }
-    private RecyclerView mStoryRecycler;
+
     private void initStoryRecycler() {
 
         mStoryRecycler = (RecyclerView) getView().findViewById(R.id.storyRecycler);
@@ -148,16 +166,23 @@ public class PostFragment extends Fragment{
     public void onStart() {
         super.onStart();
 
+
+
     }
 
     private void initNotifications() {
-   ImageButton noti = (ImageButton) getView().findViewById(R.id.notificationBtn);
+
         noti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 DatabaseReference count = FirebaseDatabase.getInstance().getReference();
                   count.child("counts").child(uid).child("nnumber").setValue("");
+
+
+
+
+
 
                 Intent i = new Intent(getActivity() , RequestActivity.class);
                 startActivity(i);
@@ -245,6 +270,7 @@ public class PostFragment extends Fragment{
         linearLayoutManager.setStackFromEnd(true);
         mPostRecycler.setLayoutManager(linearLayoutManager);
     }
+    private User mUser;
   private LastComment lc;
     private FirebaseRecyclerAdapter<Post , PostViewHolder> mAdapter;
     private void showPost() {
@@ -272,7 +298,15 @@ public class PostFragment extends Fragment{
 
                     }
                 });
+                viewHolder.nameTv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent about = new Intent(getActivity() , com.kushal.instagram.Test.class);
+                        about.putExtra(com.kushal.instagram.Test.EXTRA_INFO, post);
 
+                        startActivity(about);
+                    }
+                });
 
                 //comment window..
                 viewHolder.comment.setOnClickListener(new View.OnClickListener() {
@@ -307,8 +341,14 @@ public class PostFragment extends Fragment{
                 });
                }
 
+
+
         };
         mPostRecycler.setAdapter(mAdapter);
+
+
+
+
         mPostRecycler.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -391,9 +431,13 @@ public class PostFragment extends Fragment{
 
                     }
                 });
+
             }
+
+
         };
         mStoryRecycler.setAdapter(storyAdapter);
+
     }
 
 

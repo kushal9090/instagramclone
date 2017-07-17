@@ -6,23 +6,85 @@
     android:layout_height="match_parent"
     tools:context="com.kushal.instagram.Test">
 
-    <EditText
-        android:id="@+id/vet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/instausericon"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"/>
 
-    <Button
-        android:id="@+id/vbtn"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_single"
+        android:layout_below="@+id/nametest"
+        android:layout_marginTop="20dp"></android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/nametest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/vet"
+        android:layout_alignLeft="@+id/dp"
+        android:layout_alignStart="@+id/dp"
+        android:layout_below="@+id/dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="17dp"
+        android:text="name"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"/>
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"
+        android:layout_below="@+id/nametest"/>
+
+    <TextView
+        android:id="@+id/followUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Follow"
+        android:textSize="20dp"
+        android:layout_alignBottom="@+id/dp"
+        android:layout_toLeftOf="@+id/textView15"
+        android:layout_toStartOf="@+id/textView15"
+        android:layout_marginRight="13dp"
+        android:layout_marginEnd="13dp" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/followUser"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp"
-        android:text="Button" />
+        android:layout_marginBottom="20dp"
+        android:text="posts" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView13"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@+id/textView13"
+        android:layout_toRightOf="@+id/textView13"
+        android:text="followers" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/textView14"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:text="TextView" />
 </RelativeLayout>

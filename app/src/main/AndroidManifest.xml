@@ -65,7 +65,8 @@
         <activity
             android:name=".story.StoryScreenActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Test"></activity>
+        <activity android:name=".Test" />
+        <activity android:name=".singleuserinfo.SingleUserInfoActivity"></activity>
     </application>
 
 </manifest>

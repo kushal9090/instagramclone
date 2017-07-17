@@ -21,9 +21,9 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
       private DatabaseReference mdatabase;
       private ImageView imagepost;
       private TextView posttitle;
-      private TextView nameTv;
+       TextView nameTv;
       TextView viewlastcomment;
-      private CircleImageView profileimg;
+      CircleImageView profileimg;
       ImageView comment;
 
     public PostViewHolder(View itemView) {

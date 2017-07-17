@@ -20,6 +20,8 @@ import com.kushal.instagram.models.User;
 
 public class RequestActivity extends AppCompatActivity {
 
+    public String counts;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,9 @@ public class RequestActivity extends AppCompatActivity {
                 final DatabaseReference postRef = getRef(position);
 
                 final String reqRef = postRef.getKey();
+                int counts = getItemCount();
+                String c = String.valueOf(counts);
+
 
                 viewHolder.followback.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -78,7 +83,21 @@ public class RequestActivity extends AppCompatActivity {
             }
         };
        reqRecycler.setAdapter(mAdapter);
-            mAdapter.getItemCount();
+      //  int count = mAdapter.getItemCount();
+        //String c = String.valueOf(count);
+       // countis.setText(c);
+
+        mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                int cc = mAdapter.getItemCount();
+                 counts = String.valueOf(cc);
+                DatabaseReference c = FirebaseDatabase.getInstance().getReference().child("recyclerView");
+                c.child("counts").setValue(counts);
+            }
+        });
+
 
     }
 }

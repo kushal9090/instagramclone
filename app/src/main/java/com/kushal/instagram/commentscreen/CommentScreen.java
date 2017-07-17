@@ -120,7 +120,7 @@ public class CommentScreen extends AppCompatActivity {
                 commentET.setText("");
 
                 DatabaseReference counts = FirebaseDatabase.getInstance().getReference().child("counts").child(users.getUid());
-                counts.child("nnumber").setValue("1");
+                counts.child("nnumber").setValue("2");
 
             }
 
